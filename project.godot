@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="The Flames-Of-Pompeii"
-run/main_scene="res://Scenes/main.tscn"
+config/name="The Flames Of Pompeii"
+run/main_scene="res://Scenes/MainMeun.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
