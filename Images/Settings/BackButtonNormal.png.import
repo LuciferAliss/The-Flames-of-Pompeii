@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bf8bxjdfjr4hl"
-path="res://.godot/imported/DevelopersButtonNormal.png-d51e3b860baee3415e9aee5f826f4608.ctex"
+uid="uid://d0bmfb1w6ki0y"
+path="res://.godot/imported/BackButtonNormal.png-64772b5af6e2e6292bc28d6df0270957.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/MainMenu/DevelopersButtonNormal.png"
-dest_files=["res://.godot/imported/DevelopersButtonNormal.png-d51e3b860baee3415e9aee5f826f4608.ctex"]
+source_file="res://Images/Settings/BackButtonNormal.png"
+dest_files=["res://.godot/imported/BackButtonNormal.png-64772b5af6e2e6292bc28d6df0270957.ctex"]
 
 [params]
 

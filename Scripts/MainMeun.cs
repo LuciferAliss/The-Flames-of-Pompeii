@@ -23,4 +23,9 @@ public partial class MainMeun : Node2D
 		GetTree().CurrentScene = nextSceneInstance;
         currentScene.QueueFree();
 	}
+
+	private void CloseGame()
+	{
+		GetTree().Quit();
+	}
 }

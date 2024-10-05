@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://bjti6yvvn5pt8" path="res://Images/Settings/BackgroundSettings.png" id="1_w1x53"]
 [ext_resource type="Texture2D" uid="uid://nrlpttcqqatg" path="res://Images/Settings/Screen.png" id="2_di2vv"]
 [ext_resource type="Texture2D" uid="uid://ckq5j2eup36fo" path="res://Images/Settings/Permission.png" id="3_v6e24"]
-[ext_resource type="Texture2D" uid="uid://dbqxefi6vtfs8" path="res://Images/Settings/Screen mode.png" id="4_inue1"]
+[ext_resource type="Texture2D" uid="uid://irky121qj8is" path="res://Images/Settings/Screen mode.png" id="4_inue1"]
 [ext_resource type="Texture2D" uid="uid://cpj8lubkmntj3" path="res://Images/Settings/Brightness.png" id="5_y8dp0"]
 [ext_resource type="Texture2D" uid="uid://dkn5t6c2o3ek4" path="res://Images/Settings/Sound.png" id="6_gq3ts"]
 [ext_resource type="Texture2D" uid="uid://2jiag2ip2dej" path="res://Images/Settings/Sound effects.png" id="7_ebdc5"]
 [ext_resource type="Texture2D" uid="uid://btp6jc4grufoi" path="res://Images/Settings/Music.png" id="8_d0dtw"]
-[ext_resource type="Texture2D" uid="uid://d02te4e8kufgl" path="res://Images/Settings/BackButtonNormal.png.png" id="9_csyic"]
-[ext_resource type="Texture2D" uid="uid://dxbothq8qe5jt" path="res://Images/Settings/BackButtonHoverl.png" id="10_laywc"]
+[ext_resource type="Texture2D" uid="uid://d0bmfb1w6ki0y" path="res://Images/Settings/BackButtonNormal.png" id="10_kmqnx"]
+[ext_resource type="Texture2D" uid="uid://dbceriadi764q" path="res://Images/Settings/BackButtonHoverl.png" id="10_laywc"]
 
 [node name="Settings" type="Node2D"]
 script = ExtResource("1_rq2sm")
@@ -30,8 +30,8 @@ position = Vector2(95, 92)
 texture = ExtResource("3_v6e24")
 metadata/_edit_lock_ = true
 
-[node name="Permission2" type="Sprite2D" parent="BackgroundSettings/Screen"]
-position = Vector2(124, 163)
+[node name="FullScreenMode" type="Sprite2D" parent="BackgroundSettings/Screen"]
+position = Vector2(254, 163)
 texture = ExtResource("4_inue1")
 metadata/_edit_lock_ = true
 
@@ -39,6 +39,12 @@ metadata/_edit_lock_ = true
 position = Vector2(46, 237)
 texture = ExtResource("5_y8dp0")
 metadata/_edit_lock_ = true
+
+[node name="OptionButton" type="OptionButton" parent="BackgroundSettings/Screen"]
+offset_left = 593.0
+offset_top = 63.0
+offset_right = 905.0
+offset_bottom = 106.0
 
 [node name="Sound" type="Sprite2D" parent="BackgroundSettings"]
 position = Vector2(-736, 56)
@@ -60,7 +66,14 @@ offset_left = 472.0
 offset_top = 388.0
 offset_right = 922.0
 offset_bottom = 506.0
-texture_normal = ExtResource("9_csyic")
+texture_normal = ExtResource("10_kmqnx")
 texture_hover = ExtResource("10_laywc")
 
+[node name="TextureButton2" type="TextureButton" parent="BackgroundSettings"]
+offset_left = -83.0
+offset_top = -239.0
+offset_right = 379.0
+offset_bottom = -121.0
+
 [connection signal="pressed" from="BackgroundSettings/TextureButton" to="." method="ChangeSceneToMainMenu"]
+[connection signal="pressed" from="BackgroundSettings/TextureButton2" to="." method="ChangeSceneToMainMenu"]

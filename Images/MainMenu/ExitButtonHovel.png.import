@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d02te4e8kufgl"
-path="res://.godot/imported/BackButtonNormal.png.png-298bc85518a4e514c483cc0383449e57.ctex"
+uid="uid://4xi4deonmvl5"
+path="res://.godot/imported/ExitButtonHovel.png-a8335e58e576dcba66b1634b6ae00959.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Settings/BackButtonNormal.png.png"
-dest_files=["res://.godot/imported/BackButtonNormal.png.png-298bc85518a4e514c483cc0383449e57.ctex"]
+source_file="res://Images/MainMenu/ExitButtonHovel.png"
+dest_files=["res://.godot/imported/ExitButtonHovel.png-a8335e58e576dcba66b1634b6ae00959.ctex"]
 
 [params]
 
