@@ -1,0 +1,3 @@
+Permission=1920x1080
+Fullscreen=False
+GlobalBrightness=1,005

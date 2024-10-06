@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8spqp6my8c3g"]
+[gd_scene load_steps=14 format=3 uid="uid://b8spqp6my8c3g"]
 
 [ext_resource type="Texture2D" uid="uid://bfhg5bti723n7" path="res://Images/MainMenu/BackgroundMenu.png" id="1_7bf6v"]
 [ext_resource type="Script" path="res://Scripts/MainMeun.cs" id="1_75ppq"]
@@ -12,6 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://dtrym5s4rxss2" path="res://Images/MainMenu/ExitButtonNormal.png" id="10_gil0o"]
 [ext_resource type="Texture2D" uid="uid://u03f7btlju2u" path="res://Images/MainMenu/NameProject.png" id="11_31lcl"]
 [ext_resource type="Texture2D" uid="uid://4xi4deonmvl5" path="res://Images/MainMenu/ExitButtonHovel.png" id="11_o7sgh"]
+
+[sub_resource type="Environment" id="Environment_bdrot"]
+background_mode = 3
+adjustment_enabled = true
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_75ppq")
@@ -66,6 +70,9 @@ metadata/_edit_lock_ = true
 position = Vector2(0, -388)
 texture = ExtResource("11_31lcl")
 metadata/_edit_lock_ = true
+
+[node name="GlobalBrightness" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bdrot")
 
 [connection signal="pressed" from="BackgroundMenu/ButtonArea/SettingsButton" to="." method="ChangeSceneToSettings"]
 [connection signal="pressed" from="BackgroundMenu/ButtonArea/ExitButton" to="." method="CloseGame"]

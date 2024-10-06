@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bjf1dwifqu65o"]
+[gd_scene load_steps=16 format=3 uid="uid://bjf1dwifqu65o"]
 
 [ext_resource type="Script" path="res://Scripts/Settings.cs" id="1_rq2sm"]
-[ext_resource type="Texture2D" uid="uid://bjti6yvvn5pt8" path="res://Images/Settings/BackgroundSettings.png" id="1_w1x53"]
+[ext_resource type="Texture2D" uid="uid://ddth05r8utrk8" path="res://Images/Settings/BackgroundSettings.png" id="1_w1x53"]
 [ext_resource type="Texture2D" uid="uid://nrlpttcqqatg" path="res://Images/Settings/Screen.png" id="2_di2vv"]
 [ext_resource type="Texture2D" uid="uid://ckq5j2eup36fo" path="res://Images/Settings/Permission.png" id="3_v6e24"]
 [ext_resource type="Texture2D" uid="uid://irky121qj8is" path="res://Images/Settings/Screen mode.png" id="4_inue1"]
@@ -11,6 +11,17 @@
 [ext_resource type="Texture2D" uid="uid://btp6jc4grufoi" path="res://Images/Settings/Music.png" id="8_d0dtw"]
 [ext_resource type="Texture2D" uid="uid://d0bmfb1w6ki0y" path="res://Images/Settings/BackButtonNormal.png" id="10_kmqnx"]
 [ext_resource type="Texture2D" uid="uid://dbceriadi764q" path="res://Images/Settings/BackButtonHoverl.png" id="10_laywc"]
+[ext_resource type="Texture2D" uid="uid://dpllwtferx6re" path="res://Images/Settings/CheckBoxFalse.png" id="13_mn53g"]
+
+[sub_resource type="Theme" id="Theme_360u6"]
+default_font_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihj2g"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Environment" id="Environment_gh8yg"]
+background_mode = 3
+adjustment_enabled = true
 
 [node name="Settings" type="Node2D"]
 script = ExtResource("1_rq2sm")
@@ -40,11 +51,36 @@ position = Vector2(46, 237)
 texture = ExtResource("5_y8dp0")
 metadata/_edit_lock_ = true
 
-[node name="OptionButton" type="OptionButton" parent="BackgroundSettings/Screen"]
+[node name="PermissionSelectedButton" type="OptionButton" parent="BackgroundSettings/Screen"]
 offset_left = 593.0
 offset_top = 63.0
 offset_right = 905.0
-offset_bottom = 106.0
+offset_bottom = 113.0
+theme = SubResource("Theme_360u6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ihj2g")
+selected = 0
+item_count = 3
+popup/item_0/text = "1920x1080"
+popup/item_1/text = "1600x900"
+popup/item_1/id = 1
+popup/item_2/text = "1280x720"
+popup/item_2/id = 2
+
+[node name="FullScreenModeButton" type="TextureButton" parent="BackgroundSettings/Screen"]
+offset_left = 593.0
+offset_top = 136.0
+offset_right = 644.0
+offset_bottom = 187.0
+texture_normal = ExtResource("13_mn53g")
+
+[node name="BrightnessScrollBar" type="HScrollBar" parent="BackgroundSettings/Screen"]
+offset_left = 591.0
+offset_top = 216.0
+offset_right = 919.0
+offset_bottom = 248.0
+min_value = 0.01
+max_value = 2.0
+value = 1.0
 
 [node name="Sound" type="Sprite2D" parent="BackgroundSettings"]
 position = Vector2(-736, 56)
@@ -61,7 +97,7 @@ position = Vector2(76, 168)
 texture = ExtResource("8_d0dtw")
 metadata/_edit_lock_ = true
 
-[node name="TextureButton" type="TextureButton" parent="BackgroundSettings"]
+[node name="BackToMainMenu" type="TextureButton" parent="BackgroundSettings"]
 offset_left = 472.0
 offset_top = 388.0
 offset_right = 922.0
@@ -69,11 +105,10 @@ offset_bottom = 506.0
 texture_normal = ExtResource("10_kmqnx")
 texture_hover = ExtResource("10_laywc")
 
-[node name="TextureButton2" type="TextureButton" parent="BackgroundSettings"]
-offset_left = -83.0
-offset_top = -239.0
-offset_right = 379.0
-offset_bottom = -121.0
+[node name="GlobalBrightness" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gh8yg")
 
-[connection signal="pressed" from="BackgroundSettings/TextureButton" to="." method="ChangeSceneToMainMenu"]
-[connection signal="pressed" from="BackgroundSettings/TextureButton2" to="." method="ChangeSceneToMainMenu"]
+[connection signal="item_selected" from="BackgroundSettings/Screen/PermissionSelectedButton" to="." method="PermissionSelected"]
+[connection signal="pressed" from="BackgroundSettings/Screen/FullScreenModeButton" to="." method="UseFullScreenMode"]
+[connection signal="value_changed" from="BackgroundSettings/Screen/BrightnessScrollBar" to="." method="ChangeBrightness"]
+[connection signal="pressed" from="BackgroundSettings/BackToMainMenu" to="." method="ChangeSceneToMainMenu"]
