@@ -16,6 +16,7 @@ public partial class Settings : Node2D
 
 	private void ChangeSceneToMainMenu()
 	{
+		GlobalAudio.Instance.PlaySoundEffects("ButtonPressed");
 		var newScene = (PackedScene)GD.Load("res://Scenes//MainMeun.tscn");
         var currentScene = GetTree().CurrentScene;
         var nextSceneInstance = newScene.Instantiate();
@@ -25,8 +26,14 @@ public partial class Settings : Node2D
 		currentScene.QueueFree();
 	}
 
+	private void OutputButtonSound()
+	{
+		GlobalAudio.Instance.PlaySoundEffects("ButtonMapping");
+	}	
+
 	private void PermissionSelected(int id)
 	{
+		GlobalAudio.Instance.PlaySoundEffects("ButtonPressed");
 		Vector2I PermissionSize = new Vector2I(1920, 1080);;
 		switch (id)
 		{
@@ -48,6 +55,7 @@ public partial class Settings : Node2D
 	}
 	private void UseFullScreenMode()
 	{
+		GlobalAudio.Instance.PlaySoundEffects("ButtonPressed");
 		bool FullScreenModePosition = bool.Parse(GetDictionary()["Fullscreen"]);
 		var FullScreenModeButton = GetNode<TextureButton>("BackgroundSettings/Screen/FullScreenModeButton");
 		if(FullScreenModePosition)
@@ -68,9 +76,20 @@ public partial class Settings : Node2D
 
 	private void ChangeBrightness(float brightness)
 	{
-		var GlobalBrightness = GetNode<WorldEnvironment>("GlobalBrightness");
-		GlobalBrightness.Environment.AdjustmentBrightness = brightness;
+		GlobalBrightness.Instance.ChangeBrightness(brightness);
 		SaveSettingsGame(GetDictionary(), "GlobalBrightness", brightness.ToString());
+	}
+
+	private void ChangeMusicVolume(float volume)
+	{
+		GlobalAudio.Instance.ChangeVolumeMusic(volume);
+		SaveSettingsGame(GetDictionary(),"VolumeMusic", volume.ToString());
+	}
+
+	private void ChangeSoundEffectsVolume(float volume)
+	{
+		GlobalAudio.Instance.ChangeVolumeSoundEffects(volume);
+		SaveSettingsGame(GetDictionary(),"VolumeSoundEffects", volume.ToString());
 	}
 
 	private Dictionary<string, string> GetDictionary()
@@ -119,10 +138,20 @@ public partial class Settings : Node2D
 		else FullScreenModeButton.TextureNormal = (Texture2D)GD.Load("res://Images/Settings/CheckBoxFalse.png");
 
 		float GlobalBrightnessValue = float.Parse(Settings["GlobalBrightness"]);
-		var GlobalBrightness = GetNode<WorldEnvironment>("GlobalBrightness");
+		GlobalBrightness.Instance.ChangeBrightness(GlobalBrightnessValue);
 		var BrightnessScrollBar = GetNode<HScrollBar>("BackgroundSettings/Screen/BrightnessScrollBar");
-		GlobalBrightness.Environment.AdjustmentBrightness = GlobalBrightnessValue;
 		BrightnessScrollBar.Value = GlobalBrightnessValue;
+
+		float GlobalVolumeMusic = float.Parse(Settings["VolumeMusic"]);
+		GlobalAudio.Instance.ChangeVolumeMusic(GlobalVolumeMusic);
+		var MusicScrollBar = GetNode<HScrollBar>("BackgroundSettings/Sound/MusicScrollBar");
+		MusicScrollBar.Value = GlobalVolumeMusic;
+
+		float GlobalVolumeSoundEffects = float.Parse(Settings["VolumeSoundEffects"]);
+		GlobalAudio.Instance.ChangeVolumeSoundEffects(GlobalVolumeSoundEffects);
+		var SoundEffectsScrollBar = GetNode<HScrollBar>("BackgroundSettings/Sound/SoundEffectsScrollBar");
+		SoundEffectsScrollBar.Value = GlobalVolumeSoundEffects;
+
 	}
 	
 	private void SaveSettingsGame(Dictionary<string, string> Settings, string NameSetting, string ValueSetting)

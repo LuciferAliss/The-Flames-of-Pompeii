@@ -47,12 +47,18 @@ public partial class MainMeun : Node2D
 		else DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
 
 		float GlobalBrightnessValue = float.Parse(Settings["GlobalBrightness"]);
-		var GlobalBrightness = GetNode<WorldEnvironment>("GlobalBrightness");
-		GlobalBrightness.Environment.AdjustmentBrightness = GlobalBrightnessValue;
+		GlobalBrightness.Instance.ChangeBrightness(GlobalBrightnessValue);
+
+		float GlobalVolumeMusic = float.Parse(Settings["VolumeMusic"]);
+		GlobalAudio.Instance.ChangeVolumeMusic(GlobalVolumeMusic);
+
+		float GlobalVolumeSoundEffects = float.Parse(Settings["VolumeSoundEffects"]);
+		GlobalAudio.Instance.ChangeVolumeSoundEffects(GlobalVolumeSoundEffects);
 	}
 
 	private void ChangeSceneToSettings()
 	{
+		GlobalAudio.Instance.PlaySoundEffects("ButtonPressed");
 		var newScene = (PackedScene)GD.Load("res://Scenes//Settings.tscn");
 		var currentScene = GetTree().CurrentScene;
 		var nextSceneInstance = newScene.Instantiate();
@@ -64,6 +70,12 @@ public partial class MainMeun : Node2D
 
 	private void CloseGame()
 	{
+		GlobalAudio.Instance.PlaySoundEffects("ButtonPressed");
 		GetTree().Quit();
 	}
+
+	private void OutputButtonSound()
+	{
+		GlobalAudio.Instance.PlaySoundEffects("ButtonMapping");
+	}	
 }

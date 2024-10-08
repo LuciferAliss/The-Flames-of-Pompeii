@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch6m5vsoyu6dt"]
+
+[ext_resource type="Script" path="res://Scripts/GlobalAudio.cs" id="1_tgr0j"]
+[ext_resource type="AudioStream" uid="uid://b73eq70n5q1wc" path="res://Music/MainMenuANDSettings/MainMenu.mp3" id="3_3laq5"]
+
+[node name="GlobalAudio" type="Node"]
+script = ExtResource("1_tgr0j")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3laq5")
+autoplay = true
+bus = &"Music"
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+bus = &"SoundEffects"
