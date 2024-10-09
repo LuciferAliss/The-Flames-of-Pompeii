@@ -99,6 +99,7 @@ offset_bottom = 108.0
 min_value = -80.0
 max_value = 6.0
 value = -37.5
+metadata/_edit_lock_ = true
 
 [node name="Music" type="Sprite2D" parent="BackgroundSettings/Sound"]
 position = Vector2(76, 168)

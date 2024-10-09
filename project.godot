@@ -35,3 +35,7 @@ window/stretch/mode="canvas_items"
 [dotnet]
 
 project/assembly_name="The Flames-Of-Pompeii"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
