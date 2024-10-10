@@ -5,58 +5,62 @@ public partial class PlayerCharacter : CharacterBody2D
 {
 	[Export]
 	public float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
-	private AnimatedSprite2D Animat;
+	public const float JumpVelocity = -450.0f;
+	private AnimatedSprite2D Animated;
 
     public override void _Ready()
     {
-        Animat = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        Animated = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
     }
 
     public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
 
-		// Add the gravity.
 		if (!IsOnFloor())
 		{
 			velocity += GetGravity() * (float)delta;
 		}
 
-		
-		// Handle Jump.
 		if (Input.IsActionJustPressed("Up") && IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
+			Animated.Play("Jump");
 		}
 
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 inputDirection = Input.GetVector("Left", "Right", "Up", "Down");
-		if (inputDirection != Vector2.Zero)
+		var Direction = Input.GetAxis("Left", "Right");
+		if (Direction == 1 || Direction == -1)
 		{
-			velocity.X = inputDirection.X * Speed;
+			velocity.X = Direction * Speed;
+			if (velocity.Y == 0)
+			{
+				Animated.Play("Run");
+			}
 		}
 		else
 		{
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+			if (velocity.Y == 0)
+			{
+				Animated.Play("Idle");
+			}
+		}
+
+		if(Direction == -1)
+		{
+			Animated.FlipH = true;
+		} 
+		else if (Direction == 1)
+		{
+			Animated.FlipH = false;
+		}
+
+		if (velocity.Y > 7)
+		{
+			Animated.Play("Fall");
 		}
 
 		Velocity = velocity;
-
-		if (velocity.X != 0)
-		{
-			Animat.Animation = "Run";
-			Animat.FlipV = false;
-			// See the note below about the following boolean assignment.
-			Animat.FlipH = velocity.X < 0;
-		}
-		else if (velocity.Y != 0)
-		{
-			Animat.Animation = "Jump";
-			Animat.FlipV = velocity.Y > 0;
-		}
-
 		MoveAndSlide();
 	}
 }
