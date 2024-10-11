@@ -68,6 +68,7 @@ texture = ExtResource("11_31lcl")
 metadata/_edit_lock_ = true
 
 [connection signal="mouse_entered" from="BackgroundMenu/ButtonArea/ContinueButton" to="." method="OutputButtonSound"]
+[connection signal="pressed" from="BackgroundMenu/ButtonArea/ContinueButton" to="." method="StartGame"]
 [connection signal="mouse_entered" from="BackgroundMenu/ButtonArea/NewGameButton" to="." method="OutputButtonSound"]
 [connection signal="mouse_entered" from="BackgroundMenu/ButtonArea/SettingsButton" to="." method="OutputButtonSound"]
 [connection signal="pressed" from="BackgroundMenu/ButtonArea/SettingsButton" to="." method="ChangeSceneToSettings"]

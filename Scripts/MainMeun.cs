@@ -68,6 +68,18 @@ public partial class MainMeun : Node2D
         currentScene.QueueFree();
 	}
 
+	private void StartGame()
+	{
+		GlobalAudio.Instance.PlaySoundEffects("ButtonPressed");
+		var newScene = (PackedScene)GD.Load("res://Scenes//level.tscn");
+		var currentScene = GetTree().CurrentScene;
+		var nextSceneInstance = newScene.Instantiate();
+
+        GetTree().Root.AddChild(nextSceneInstance);
+		GetTree().CurrentScene = nextSceneInstance;
+        currentScene.QueueFree();
+	}
+
 	private void CloseGame()
 	{
 		GlobalAudio.Instance.PlaySoundEffects("ButtonPressed");
