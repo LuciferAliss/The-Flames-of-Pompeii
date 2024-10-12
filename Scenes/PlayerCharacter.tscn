@@ -1,6 +1,6 @@
-[gd_scene load_steps=39 format=3 uid="uid://bkw15e22jaqix"]
+[gd_scene load_steps=39 format=3 uid="uid://ddccoh7nrxpdb"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerCharacter.cs" id="1_r6i0f"]
+[ext_resource type="Script" path="res://Scripts/Mobs/Player/PlayerCharacter.cs" id="1_mc5ph"]
 [ext_resource type="Texture2D" uid="uid://0ari6cgh1e5b" path="res://Images/Model/Player/GG1.png" id="2_3fc3c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qwpvr"]
@@ -274,8 +274,7 @@ radius = 23.0
 height = 96.0
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
-script = ExtResource("1_r6i0f")
-Speed = 400.0
+script = ExtResource("1_mc5ph")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3.09459, 3.09459)

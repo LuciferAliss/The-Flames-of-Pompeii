@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b37tjmmb65wfs" path="res://Images/ForestLocation/Layer_0011_0.png" id="2_itega"]
 [ext_resource type="Texture2D" uid="uid://b4m8p1qctmfxk" path="res://Images/ForestLocation/Layer_0000_9.png" id="3_w06gs"]
 [ext_resource type="Texture2D" uid="uid://bixswk4mgi728" path="res://Images/ForestLocation/Layer_0009_2.png" id="3_yhret"]
-[ext_resource type="PackedScene" uid="uid://bkw15e22jaqix" path="res://Scenes/PlayerCharacter.tscn" id="4_4paiy"]
+[ext_resource type="PackedScene" uid="uid://ddccoh7nrxpdb" path="res://Scenes/PlayerCharacter.tscn" id="4_4paiy"]
 [ext_resource type="Texture2D" uid="uid://dcj6kcs5lxcwp" path="res://Images/ForestLocation/Layer_0008_3.png" id="4_yh4ig"]
 [ext_resource type="Texture2D" uid="uid://yshabdmkl5ym" path="res://Images/ForestLocation/Layer_0007_Lights.png" id="5_qn752"]
 [ext_resource type="Texture2D" uid="uid://p74gocjr4508" path="res://Images/ForestLocation/Layer_0006_4.png" id="6_w37yw"]
@@ -414,7 +414,6 @@ tile_set = SubResource("TileSet_yt1vg")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("4_4paiy")]
 position = Vector2(480, 472)
-Speed = 300.0
 
 [node name="Skeleton" parent="." instance=ExtResource("13_vrrl3")]
 position = Vector2(944, 392)

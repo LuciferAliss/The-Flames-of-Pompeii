@@ -1,6 +1,23 @@
 using Godot;
 using System;
 
+// public abstract class StatePlayer
+// {
+// 	protected PlayerCharacter player;
+
+// 	public abstract void Move(double delta);
+// 	public abstract void Attack();
+// }
+
+// class MoveStatePlayer : StatePlayer
+// 	{
+// 		public override void Move(double delta)
+// 		{
+			
+// 			PlayerCharacter player = PlayerCharacter.Instance;
+			
+// 	}
+
 public partial class PlayerCharacter : CharacterBody2D, ObjectMove
 {
 	[Export] public float Speed = 300.0f;
@@ -8,6 +25,7 @@ public partial class PlayerCharacter : CharacterBody2D, ObjectMove
 	public const float JumpVelocity = -450.0f;
 	public static CharacterBody2D Instance { get; private set; }
 	private AnimatedSprite2D Animated;
+	//StatePlayer state;
 
     public override void _Ready()
     {
