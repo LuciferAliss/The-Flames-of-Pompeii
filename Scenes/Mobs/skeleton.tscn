@@ -342,31 +342,33 @@ animations = [{
 "texture": SubResource("AtlasTexture_s0ysp")
 }],
 "loop": true,
-"name": &"Walk",
+"name": &"Run",
 "speed": 9.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sutlh"]
-radius = 24.0
-height = 96.0
+radius = 16.0
+height = 64.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lvdpr"]
 size = Vector2(858.5, 192)
 
 [node name="Skeleton" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_eokjm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2.375, 2.375)
 sprite_frames = SubResource("SpriteFrames_015nw")
-animation = &"Hit"
-frame_progress = 0.839197
+animation = &"Idle"
+frame_progress = 0.56421
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-8, 0)
 shape = SubResource("CapsuleShape2D_sutlh")
 
 [node name="Detector" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
 position = Vector2(0, -48)
