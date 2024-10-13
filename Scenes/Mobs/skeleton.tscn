@@ -368,7 +368,6 @@ frame_progress = 0.56421
 shape = SubResource("CapsuleShape2D_sutlh")
 
 [node name="Detector" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
 position = Vector2(0, -48)
