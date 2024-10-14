@@ -1,23 +1,26 @@
 using Godot;
 using System;
+using System.Reflection;
 
 public partial class Skeleton : Mob, ObjectMove
 {
-	CharacterBody2D player;
-	private AnimatedSprite2D Animated;
 	bool chase = false;
-	// Called when the node enters the scene tree for the first time.
+	Vector2 playerPosition;
+
 	public override void _Ready()
 	{
 		Animated = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		player = PlayerCharacter.Instance;
+		Signals.Instance.PlayerPositionUpdate += SetPlayerPosition;
 		Speed = 150;
 	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
 		Move(delta);
+	}
+
+	public void SetPlayerPosition(Vector2 newPlayerPosition)
+	{
+		playerPosition = newPlayerPosition;
 	}
 
 	public void Move(double delta)
@@ -29,7 +32,7 @@ public partial class Skeleton : Mob, ObjectMove
 			velocity += GetGravity() * (float)delta;
 		}
 
-		var Direction = (player.Position - this.Position).Normalized();
+		var Direction = (playerPosition - this.Position).Normalized();
 
 		if (chase)
 		{
@@ -57,17 +60,11 @@ public partial class Skeleton : Mob, ObjectMove
 
 	public void DetectPlayer(Node2D player)
 	{
-		if (player.Name == "PlayerCharacter")
-		{
-			chase = true;
-		}
+		chase = true;
 	}
 
 	public void NoDetectPlayer(Node2D player)
 	{
-		if (player.Name == "PlayerCharacter")
-		{
-			chase = false;
-		}
+		chase = false;
 	}
 }

@@ -1,4 +1,4 @@
-Permission=1920x1080
+Permission=1600x900
 Fullscreen=False
 GlobalBrightness=1,0043355
 VolumeMusic=-19,636318

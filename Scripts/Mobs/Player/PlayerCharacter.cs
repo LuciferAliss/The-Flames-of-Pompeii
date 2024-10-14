@@ -2,6 +2,43 @@ using Godot;
 using System;
 using System.Threading.Tasks;
 
+public class Expectation
+{
+	public bool InputAttack1 {get; private set; } = false;
+	public bool InputAttack2 {get; private set; } = false;
+	public bool InputAttack3 {get; private set; } = false;
+	
+	public void InputButtonAttack1()
+	{
+		InputAttack1 = true;
+	}    
+	
+	public void NotInputButtonAttack1()
+	{
+		InputAttack1 = false;
+	}  
+
+	public void InputButtonAttack2()
+	{
+		InputAttack2 = true;
+	}    
+	
+	public void NotInputButtonAttack2()
+	{
+		InputAttack2 = false;
+	} 
+	
+	public void InputButtonAttack3()
+	{
+		InputAttack3 = true;
+	}    
+	
+	public void NotInputButtonAttack3()
+	{
+		InputAttack3 = false;
+	} 
+}
+
 public abstract class StatePlayer
 {
 	protected PlayerCharacter player;
@@ -14,6 +51,7 @@ public abstract class StatePlayer
 	public abstract void Move();
 	public abstract void Attack1();
 	public abstract void Attack2();
+	public abstract void Attack3();
 }
 
 class MoveStatePlayer : StatePlayer
@@ -82,6 +120,10 @@ class MoveStatePlayer : StatePlayer
 	public override void Attack2()
 	{
 	}
+
+	public override void Attack3()
+	{
+	}
 }
 
 class Attack1StatePlayer : StatePlayer
@@ -111,21 +153,24 @@ class Attack1StatePlayer : StatePlayer
 		{
 			velocity.X += 40;
 		}
-		if (Input.IsActionJustPressed("Attack") && player.combo)
+		
+		if (Input.IsActionJustPressed("Attack"))
 		{
-			GD.Print("few");
-			player.ChangeState(new Attack2StatePlayer(player));
+			player.expectation.InputButtonAttack1();
+			return;
 		}
-		else 
-		{
-			player.animatedPlayer.Play("Attack1");
-		}
+
+		player.animatedPlayer.Play("Attack1");
 
 		player.Velocity = velocity;
 		player.MoveAndSlide();
 	}
 
 	public override void Attack2()
+	{
+	}
+
+	public override void Attack3()
 	{
 	}
 }
@@ -161,7 +206,59 @@ class Attack2StatePlayer : StatePlayer
 			velocity.X += 40;
 		}
 
+		if (Input.IsActionJustPressed("Attack"))
+		{
+			player.expectation.InputButtonAttack2();
+			return;
+		}
+
 		player.animatedPlayer.Play("Attack2");
+		
+		player.Velocity = velocity;
+		player.MoveAndSlide();
+	}
+
+	public override void Attack3()
+	{
+	}
+}
+
+class Attack3StatePlayer : StatePlayer
+{
+	public Attack3StatePlayer(PlayerCharacter player) : base(player) { }
+
+	public override void Move()
+    {
+	}
+
+    public override void Attack1()
+    { 
+	}
+
+	public override void Attack2()
+	{
+	}
+
+	public override void Attack3()
+	{
+		Vector2 velocity = player.Velocity;
+		if (!player.IsOnFloor())
+		{
+			velocity += player.GetGravity() * (float)player.delta;
+		}
+
+		velocity.X = 0;
+		
+		if(player.Animated.FlipH)
+		{
+			velocity.X += -40;
+		} 
+		else 
+		{
+			velocity.X += 40;
+		}
+
+		player.animatedPlayer.Play("Attack3");
 
 		player.Velocity = velocity;
 		player.MoveAndSlide();
@@ -178,7 +275,10 @@ public partial class PlayerCharacter : CharacterBody2D
 	public AnimatedSprite2D Animated { get; private set; }
 	public AnimationPlayer animatedPlayer { get; private set; }
 	StatePlayer state;
-	public bool combo {get; set; } = false;
+	public bool combo1 {get; set; } = false;
+	public bool combo2 {get; set; } = false;
+	public Expectation expectation = new();
+
 
     public override void _Ready()
     {
@@ -197,7 +297,9 @@ public partial class PlayerCharacter : CharacterBody2D
 		state.Move();
     	state.Attack1();
 		state.Attack2();
-	}
+		state.Attack3();
+		Signals.Instance.EmitPositionUpdate(Position);
+	}	
 
 	public void ChangeState(StatePlayer newState)
     {
@@ -206,28 +308,43 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	public void Combo1()
 	{
-		combo = true;
+		combo1 = true;
+	}
+
+	public void Combo2()
+	{
+		combo2 = true;
 	}
 
 	public void FinishedAnimation(StringName NameAnime)
 	{
 		if (NameAnime == "Attack1")
 		{
-			combo = false;
+			if(combo1 && expectation.InputAttack1)
+			{
+				ChangeState(new Attack2StatePlayer(this));
+				return;
+			}
+			combo1 = false;
 			ChangeState(new MoveStatePlayer(this));
 		}
 		else if (NameAnime == "Attack2")
 		{
-			if (combo && Input.IsActionJustPressed("Attack"))
+			combo1 = false;
+			expectation.NotInputButtonAttack1();
+			if(combo2 && expectation.InputAttack2)
 			{
-				combo = false;  
-				ChangeState(new Attack1StatePlayer(this));
+				ChangeState(new Attack3StatePlayer(this));
+				return;
 			}
-			else
-			{
-				combo = false;
-				ChangeState(new MoveStatePlayer(this)); 
-			}
+			combo2 = false;
+			ChangeState(new MoveStatePlayer(this));
+		}
+		else if (NameAnime == "Attack3")
+		{
+			combo2 = false;
+			expectation.NotInputButtonAttack2();
+			ChangeState(new MoveStatePlayer(this));
 		}
 	}
 }

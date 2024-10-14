@@ -21,5 +21,5 @@ public abstract partial class Mob : CharacterBody2D
 {
 	protected int Health;
     protected float Speed;
-    AnimatableBody2D Animated;
+    protected AnimatedSprite2D Animated;
 }
