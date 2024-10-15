@@ -568,6 +568,8 @@ metadata/_edit_horizontal_guides_ = [-80.0]
 scale = Vector2(3.09459, 3.09459)
 sprite_frames = SubResource("SpriteFrames_y4c0q")
 animation = &"Attack1"
+frame = 4
+frame_progress = 1.0
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false

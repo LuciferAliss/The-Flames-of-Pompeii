@@ -361,8 +361,8 @@ script = ExtResource("1_eokjm")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2.375, 2.375)
 sprite_frames = SubResource("SpriteFrames_015nw")
-animation = &"Attack"
-frame_progress = 0.741388
+animation = &"Hit"
+frame_progress = 0.173039
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -394,5 +394,6 @@ position = Vector2(56, 0)
 
 [connection signal="body_entered" from="Detector" to="." method="DetectPlayer"]
 [connection signal="body_exited" from="Detector" to="." method="NoDetectPlayer"]
+[connection signal="area_entered" from="AttackDirection/DamageBox/HurBox" to="." method="EmitAttackPlayer"]
 
 [editable path="AttackDirection/DamageBox"]

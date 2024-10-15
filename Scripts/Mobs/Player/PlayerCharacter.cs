@@ -269,6 +269,7 @@ public partial class PlayerCharacter : CharacterBody2D
 {
 	[Export] public float Speed = 300.0f;
 	[Export] public int Health = 100;
+	[Export] public int Damage = 20;
 	public const float JumpVelocity = -450.0f;
 	public double delta { get; private set; }
 	public static CharacterBody2D Instance { get; private set; }
@@ -346,5 +347,10 @@ public partial class PlayerCharacter : CharacterBody2D
 			expectation.NotInputButtonAttack2();
 			ChangeState(new MoveStatePlayer(this));
 		}
+	}
+
+	public void EmitEnemyAttack()
+	{
+		Signals.Instance.EmitEnemyHurAttack(Damage);
 	}
 }

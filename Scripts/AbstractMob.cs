@@ -17,9 +17,9 @@ interface ObjectAttack
     void Attack();
 }
 
-public abstract partial class Mob : CharacterBody2D
+public abstract partial class Mobs : CharacterBody2D
 {
-	protected int Health;
-    protected float Speed;
-    protected AnimatedSprite2D Animated;
+	public int Health;
+    public float Speed;
+    public AnimatedSprite2D Animated;
 }
