@@ -35,12 +35,12 @@ class MoveStateSkeleton : StateMobs
 		if (skeleton.chase && Math.Abs(skeleton.playerPosition.X - skeleton.Position.X) > 100)
 		{
 			velocity.X = Direction.X * skeleton.Speed;
-			skeleton.Animated.Play("Run");
+			skeleton.animationPlayer.Play("Run");
  		}
 		else 
 		{
 			velocity.X = 0;	
-			skeleton.Animated.Play("Idle");
+			skeleton.animationPlayer.Play("Idle");
 		}
 		
 		if(Direction.X < 0)
@@ -63,11 +63,10 @@ class MoveStateSkeleton : StateMobs
 
     public override void Hit()
     {
-        // if(skeleton.checkDamage)
-		// {
-			
-		// 	skeleton.checkDamage = false;
-		// }
+        if(skeleton.checkDamage)
+		{
+			skeleton.checkDamage = false;
+		}
     }
 
     public override void Dead()
@@ -76,28 +75,28 @@ class MoveStateSkeleton : StateMobs
     }
 }
 
-// class HitStateSkeleton : Skeleton
-// {
-// 	public MoveStateSkeleton(Skeleton skeleton) : base(skeleton) { }
+class HitStateSkeleton : StateMobs
+{
+	public HitStateSkeleton(Skeleton skeleton) : base(skeleton) { }
 	
-// 	public override void Move()
-//     {
-//     }
+	public override void Move()
+    {
+    }
 
-//     public override void Attack()
-//     {
-//         throw new NotImplementedException();
-//     }
+    public override void Attack()
+	{
+    }
 
-//     public override void Hit()
-//     {
-//     }
+    public override void Hit()
+    {
+		skeleton.animationPlayer.Play("Hit");
+		skeleton.ChangeState(new MoveStateSkeleton(skeleton));
+    }
 
-//     public override void Dead()
-//     {
-//         throw new NotImplementedException();
-//     }
-// }
+    public override void Dead()
+    {
+    }
+}
 
 public partial class Skeleton : Mobs, ObjectMove
 {
@@ -106,14 +105,16 @@ public partial class Skeleton : Mobs, ObjectMove
     public double delta;
     public Vector2 playerPosition;
 	public bool checkDamage = false; 
+	int Damage = 20;
 
 	public override void _Ready()
 	{
 		Animated = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		stateMob = new MoveStateSkeleton(this);
 		Signals.Instance.PlayerPositionUpdate += SetPlayerPosition;
-		Signals.Instance.EnemyHurAttack += OnDamageReceived;
 		Speed = 150;
+		Health = 100;
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -131,11 +132,6 @@ public partial class Skeleton : Mobs, ObjectMove
 		playerPosition = newPlayerPosition;
 	}
 
-	public void OnDamageReceived(int Damage)
-	{
-		checkDamage = true;
-	}
-
 	public void Move(double delta)
 	{
 		stateMob.Move();
@@ -149,5 +145,10 @@ public partial class Skeleton : Mobs, ObjectMove
 	public void NoDetectPlayer(Node2D player)
 	{
 		chase = false;
+	}
+
+	public void OnHitBox(Area2D area)
+	{
+		Signals.Instance.EmitEnemyAttack(Damage);
 	}
 }

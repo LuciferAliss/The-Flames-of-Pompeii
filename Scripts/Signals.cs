@@ -6,7 +6,7 @@ public partial class Signals : Node
 	[Signal]
     public delegate void PlayerPositionUpdateEventHandler(Vector2 newPosition);
 	[Signal]
-	public delegate void EnemyHurAttackEventHandler(int Damage);
+	public delegate void EnemyAttackEventHandler(int enemyDamage);
 	
 	public static Signals Instance { get; private set; }
 
@@ -20,8 +20,8 @@ public partial class Signals : Node
         EmitSignal(nameof(PlayerPositionUpdate), position);
     }
 
-	public void EmitEnemyHurAttack(int Damage)
+	public void EmitEnemyAttack(int enemyDamage)
     {
-        EmitSignal(nameof(EnemyHurAttack), Damage);
+        EmitSignal(nameof(EnemyAttack), enemyDamage);
     }
 }

@@ -288,7 +288,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		animatedPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		Input.MouseMode = Input.MouseModeEnum.Hidden;
 		animatedPlayer.AnimationFinished += FinishedAnimation;
-
+		Signals.Instance.EnemyAttack += OnDamageReceived;
 		state = new MoveStatePlayer(this);
 	}
 
@@ -348,9 +348,11 @@ public partial class PlayerCharacter : CharacterBody2D
 			ChangeState(new MoveStatePlayer(this));
 		}
 	}
-
-	public void EmitEnemyAttack()
-	{
-		Signals.Instance.EmitEnemyHurAttack(Damage);
-	}
+	
+	public void OnDamageReceived(int damage)
+		{
+			//ChangeState(new HitStatePlayer(this));
+			Health -= damage;
+			GD.Print(Health);
+		}
 }
