@@ -3,7 +3,7 @@ using System;
 
 interface ObjectMove
 {
-    void Move(double delta);
+    void Move();
 }
 
 interface ObjectTakeDamage

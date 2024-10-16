@@ -1,11 +1,10 @@
-[gd_scene load_steps=58 format=3 uid="uid://ddnr78qxhgkud"]
+[gd_scene load_steps=60 format=3 uid="uid://ddnr78qxhgkud"]
 
 [ext_resource type="Script" path="res://Scripts/Mobs/Skeleton.cs" id="1_eokjm"]
 [ext_resource type="Texture2D" uid="uid://bweesuodl5ibv" path="res://Images/Model/Skeleton/Sprite.png" id="1_jodmt"]
 [ext_resource type="PackedScene" uid="uid://snvte4y1bve1" path="res://Scenes/DamageBox/DamageBox.tscn" id="3_key14"]
 
 [sub_resource type="Animation" id="Animation_6deym"]
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -30,10 +29,21 @@ tracks/1/keys = {
 "update": 1,
 "values": ["Attack"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.333333, 0.4, 0.633333, 0.733333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_unr2u"]
 length = 1.625
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -61,7 +71,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_d32g4"]
 length = 0.428571
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -88,7 +97,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_k72lu"]
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -116,7 +124,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_loglr"]
 length = 1.33333
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -142,12 +149,28 @@ tracks/1/keys = {
 "values": ["Run"]
 }
 
+[sub_resource type="Animation" id="Animation_7kim2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8ojky"]
 _data = {
 "Attack": SubResource("Animation_6deym"),
 "Die": SubResource("Animation_unr2u"),
 "Hit": SubResource("Animation_d32g4"),
 "Idle": SubResource("Animation_k72lu"),
+"RESET": SubResource("Animation_7kim2"),
 "Run": SubResource("Animation_loglr")
 }
 
@@ -373,7 +396,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2ce1j")
 }],
-"loop": true,
+"loop": false,
 "name": &"Attack",
 "speed": 13.0
 }, {
@@ -417,7 +440,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vi5wu")
 }],
-"loop": true,
+"loop": false,
 "name": &"Die",
 "speed": 8.0
 }, {
@@ -431,7 +454,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mnfqr")
 }],
-"loop": true,
+"loop": false,
 "name": &"Hit",
 "speed": 7.0
 }, {
@@ -448,7 +471,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wuqui")
 }],
-"loop": true,
+"loop": false,
 "name": &"Idle",
 "speed": 4.0
 }, {
@@ -489,7 +512,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s0ysp")
 }],
-"loop": true,
+"loop": false,
 "name": &"Run",
 "speed": 9.0
 }]
@@ -500,6 +523,9 @@ height = 64.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lvdpr"]
 size = Vector2(858.5, 192)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c71lx"]
+size = Vector2(34, 34)
 
 [node name="Skeleton" type="CharacterBody2D"]
 collision_layer = 4
@@ -514,6 +540,7 @@ libraries = {
 scale = Vector2(2.375, 2.375)
 sprite_frames = SubResource("SpriteFrames_015nw")
 animation = &"Attack"
+frame = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -543,8 +570,19 @@ collision_mask = 16
 [node name="CollisionShape2D" parent="AttackDirection/DamageBox/HitBox" index="0"]
 position = Vector2(56, 0)
 
+[node name="AttackRange" type="Area2D" parent="AttackDirection"]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDirection/AttackRange"]
+position = Vector2(56, 0)
+shape = SubResource("RectangleShape2D_c71lx")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="FinishedAnimation"]
 [connection signal="body_entered" from="Detector" to="." method="DetectPlayer"]
 [connection signal="body_exited" from="Detector" to="." method="NoDetectPlayer"]
 [connection signal="area_entered" from="AttackDirection/DamageBox/HitBox" to="." method="OnHitBox"]
+[connection signal="body_entered" from="AttackDirection/AttackRange" to="." method="OnAttackRange"]
 
 [editable path="AttackDirection/DamageBox"]

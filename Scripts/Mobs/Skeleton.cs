@@ -58,7 +58,6 @@ class MoveStateSkeleton : StateMobs
 
     public override void Attack()
     {
-        throw new NotImplementedException();
     }
 
     public override void Hit()
@@ -71,7 +70,28 @@ class MoveStateSkeleton : StateMobs
 
     public override void Dead()
     {
-        throw new NotImplementedException();
+    }
+}
+
+class AttackStateSkeleton : StateMobs
+{
+	public AttackStateSkeleton(Skeleton skeleton) : base(skeleton) { }
+	
+	public override void Move()
+    {
+    }
+
+    public override void Attack()
+	{
+		skeleton.animationPlayer.Play("Attack");
+    }
+
+    public override void Hit()
+    {
+    }
+
+    public override void Dead()
+    {
     }
 }
 
@@ -90,7 +110,6 @@ class HitStateSkeleton : StateMobs
     public override void Hit()
     {
 		skeleton.animationPlayer.Play("Hit");
-		skeleton.ChangeState(new MoveStateSkeleton(skeleton));
     }
 
     public override void Dead()
@@ -98,7 +117,7 @@ class HitStateSkeleton : StateMobs
     }
 }
 
-public partial class Skeleton : Mobs, ObjectMove
+public partial class Skeleton : Mobs, ObjectMove, ObjectAttack
 {
 	public bool chase = false;
     public StateMobs stateMob;
@@ -119,7 +138,8 @@ public partial class Skeleton : Mobs, ObjectMove
 	public override void _PhysicsProcess(double delta)
 	{
 		this.delta = delta;
-		Move(delta);
+		Move();
+		Attack();
 	}
 
 	public void ChangeState(StateMobs newState) 
@@ -132,9 +152,13 @@ public partial class Skeleton : Mobs, ObjectMove
 		playerPosition = newPlayerPosition;
 	}
 
-	public void Move(double delta)
+	public void Move()
 	{
 		stateMob.Move();
+	}
+	public void Attack()
+	{
+		stateMob.Attack();
 	}
 
 	public void DetectPlayer(Node2D player)
@@ -150,5 +174,15 @@ public partial class Skeleton : Mobs, ObjectMove
 	public void OnHitBox(Area2D area)
 	{
 		Signals.Instance.EmitEnemyAttack(Damage);
+	}
+
+	public void OnAttackRange(Node2D player)
+	{
+		ChangeState(new AttackStateSkeleton(this));
+	}
+
+	public void FinishedAnimation(StringName NameAnime)
+	{
+		ChangeState(new MoveStateSkeleton(this));
 	}
 }
