@@ -32,7 +32,7 @@ class MoveStateSkeleton : StateMobs
 
 		var Direction = (skeleton.playerPosition - skeleton.Position).Normalized();
 
-		if (skeleton.chase && Math.Abs(skeleton.playerPosition.X - skeleton.Position.X) > 100)
+		if (skeleton.chase && Math.Abs(skeleton.playerPosition.X - skeleton.Position.X) > 60)
 		{
 			velocity.X = Direction.X * skeleton.Speed;
 			skeleton.animationPlayer.Play("Run");
@@ -45,6 +45,7 @@ class MoveStateSkeleton : StateMobs
 		
 		if(Direction.X < 0)
 		{
+			
 			skeleton.Animated.FlipH = true;
 		} 
 		else
@@ -154,6 +155,17 @@ public partial class Skeleton : Mobs, ObjectMove, ObjectAttack
 
 	public void Move()
 	{
+		GD.Print($"{playerPosition.X} {Position.X}");
+		if (playerPosition.X < Position.X)
+		{
+			GetNode<Area2D>("AttackDirection/AttackRange").Rotate(180f);
+			GetNode<Area2D>("AttackDirection/DamageBox/HitBox").Rotate(180f);
+		}
+		else if (playerPosition.X > Position.X)
+		{
+			GetNode<Area2D>("AttackDirection/AttackRange").Rotate(0);
+			GetNode<Area2D>("AttackDirection/DamageBox/HitBox").Rotate(0);
+		}
 		stateMob.Move();
 	}
 	public void Attack()
@@ -183,6 +195,13 @@ public partial class Skeleton : Mobs, ObjectMove, ObjectAttack
 
 	public void FinishedAnimation(StringName NameAnime)
 	{
+		Area2D AttackRange = GetNode<Area2D>("AttackDirection/AttackRange");
+		if (AttackRange.OverlapsBody(PlayerCharacter.Instance))
+		{
+			ChangeState(new AttackStateSkeleton(this));
+			return;
+		}
+
 		ChangeState(new MoveStateSkeleton(this));
 	}
 }
