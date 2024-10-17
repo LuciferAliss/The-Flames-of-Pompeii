@@ -47,19 +47,11 @@ class MoveStateSkeleton : StateMobs
 		{
 			
 			skeleton.Animated.FlipH = true;
+			skeleton.AttackDirection.RotationDegrees = 180;
 		} 
 		else
 		{
 			skeleton.Animated.FlipH = false;
-		}
-
-		var direction = (skeleton.playerPosition - skeleton.Position).Normalized();
-		if (direction.X < 0)
-		{ 
-			skeleton.AttackDirection.RotationDegrees = 180;
-		}
-		else
-		{
 			skeleton.AttackDirection.RotationDegrees = 0;
 		}
 
@@ -196,7 +188,6 @@ public partial class Skeleton : Mobs, IMove, IAttack
 		{
 			ChangeState(new HitStateSkeleton(this));
 		}
-		GD.Print(Health);
 	}
 
 	public void SetPlayerPosition(Vector2 newPlayerPosition)
@@ -225,7 +216,7 @@ public partial class Skeleton : Mobs, IMove, IAttack
 
 	public void OnHitBox(Area2D area)
 	{
-		//Signals.Instance.EmitEnemyAttack(Damage);
+		Signals.Instance.EmitEnemyAttack(Damage);
 	}
 
 	public void OnAttackRange(Node2D player)
@@ -235,6 +226,11 @@ public partial class Skeleton : Mobs, IMove, IAttack
 
 	public void FinishedAnimation(StringName NameAnime)
 	{
+		if(NameAnime == "Death")
+		{
+			QueueFree();
+		}
+
 		Area2D AttackRange = GetNode<Area2D>("AttackDirection/AttackRange");
 		if (AttackRange.OverlapsBody(PlayerCharacter.Instance))
 		{

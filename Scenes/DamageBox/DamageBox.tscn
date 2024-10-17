@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://snvte4y1bve1"]
+[gd_scene load_steps=4 format=3 uid="uid://snvte4y1bve1"]
+
+[ext_resource type="Script" path="res://Scenes/DamageBox/DamageBox.cs" id="1_lrynw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsugl"]
 radius = 24.0
@@ -7,6 +9,7 @@ radius = 24.0
 radius = 32.0
 
 [node name="DamageBox" type="Node2D"]
+script = ExtResource("1_lrynw")
 
 [node name="HurBox" type="Area2D" parent="."]
 

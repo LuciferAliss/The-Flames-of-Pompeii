@@ -96,10 +96,12 @@ class MoveStatePlayer : StatePlayer
 		if(Direction == -1)
 		{
 			player.Animated.FlipH = true;
+			player.DamageBox.RotationDegrees = 180;
 		} 
 		else if (Direction == 1)
 		{
 			player.Animated.FlipH = false;
+			player.DamageBox.RotationDegrees = 0;
 		}
 
 		if (velocity.Y > 7)
@@ -380,12 +382,14 @@ public partial class PlayerCharacter : CharacterBody2D
 	public bool combo1 {get; set; } = false;
 	public bool combo2 {get; set; } = false;
 	public Expectation expectation = new();
+	public Node2D DamageBox;
 
     public override void _Ready()
     {
 		Instance = this;
         Animated = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		animatedPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		DamageBox = GetNode<Node2D>("AttackDirection/DamageBox");
 		Input.MouseMode = Input.MouseModeEnum.Hidden;
 		animatedPlayer.AnimationFinished += FinishedAnimation;
 		Signals.Instance.EnemyAttack += OnDamageReceived;
@@ -479,7 +483,6 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			ChangeState(new HitStatePlayer(this));
 		}
-		GD.Print(Health);
 	}
 
 	public void OnHitBox(Area2D Mobs)
