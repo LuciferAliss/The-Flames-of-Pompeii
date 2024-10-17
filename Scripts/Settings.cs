@@ -17,7 +17,7 @@ public partial class Settings : Node2D
 	private void ChangeSceneToMainMenu()
 	{
 		GlobalAudio.Instance.PlaySoundEffects("ButtonPressed");
-		var newScene = (PackedScene)GD.Load("res://Scenes//MainMeun.tscn");
+		var newScene = (PackedScene)GD.Load("res://Scenes//MainMenu.tscn");
         var currentScene = GetTree().CurrentScene;
         var nextSceneInstance = newScene.Instantiate();
         

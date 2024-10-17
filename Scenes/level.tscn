@@ -417,9 +417,9 @@ tile_set = SubResource("TileSet_yt1vg")
 [node name="Mobs" type="Node2D" parent="."]
 
 [node name="Skeleton" parent="Mobs" instance=ExtResource("13_vrrl3")]
-position = Vector2(1080, 480)
+position = Vector2(1032, 912)
 
 [node name="Player" type="Node2D" parent="."]
 
 [node name="PlayerCharacter" parent="Player" instance=ExtResource("4_4paiy")]
-position = Vector2(480, 472)
+position = Vector2(504, 896)

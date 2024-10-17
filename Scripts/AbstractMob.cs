@@ -1,25 +1,19 @@
 using Godot;
 using System;
 
-interface ObjectMove
+interface IMove
 {
     void Move();
 }
 
-interface ObjectTakeDamage
-{
-    void TakeDamage();
-    void Die();
-}
-
-interface ObjectAttack
+interface IAttack
 {
     void Attack();
 }
 
 public abstract partial class Mobs : CharacterBody2D
 {
-	public int Health;
+	public float Health;
     public float Speed;
     public AnimatedSprite2D Animated;
     public AnimationPlayer animationPlayer;

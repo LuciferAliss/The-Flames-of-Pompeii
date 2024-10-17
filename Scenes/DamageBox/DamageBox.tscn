@@ -4,7 +4,7 @@
 radius = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bv5l7"]
-radius = 16.0
+radius = 32.0
 
 [node name="DamageBox" type="Node2D"]
 

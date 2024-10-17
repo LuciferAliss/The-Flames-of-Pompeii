@@ -14,7 +14,7 @@ public abstract class StateMobs
 	public abstract void Move();
 	public abstract void Attack();
     public abstract void Hit();
-    public abstract void Dead();
+    public abstract void Death();
 }
 
 class MoveStateSkeleton : StateMobs
@@ -27,7 +27,7 @@ class MoveStateSkeleton : StateMobs
 
 		if (!skeleton.IsOnFloor())
 		{
-			velocity += skeleton.GetGravity() * (float)skeleton.delta;
+			velocity += skeleton.GetGravity() * (float)skeleton.skeletonDelta;
 		}
 
 		var Direction = (skeleton.playerPosition - skeleton.Position).Normalized();
@@ -53,6 +53,16 @@ class MoveStateSkeleton : StateMobs
 			skeleton.Animated.FlipH = false;
 		}
 
+		var direction = (skeleton.playerPosition - skeleton.Position).Normalized();
+		if (direction.X < 0)
+		{ 
+			skeleton.AttackDirection.RotationDegrees = 180;
+		}
+		else
+		{
+			skeleton.AttackDirection.RotationDegrees = 0;
+		}
+
 		skeleton.Velocity = velocity;
 		skeleton.MoveAndSlide();
     }
@@ -69,7 +79,7 @@ class MoveStateSkeleton : StateMobs
 		}
     }
 
-    public override void Dead()
+    public override void Death()
     {
     }
 }
@@ -91,7 +101,7 @@ class AttackStateSkeleton : StateMobs
     {
     }
 
-    public override void Dead()
+    public override void Death()
     {
     }
 }
@@ -113,19 +123,42 @@ class HitStateSkeleton : StateMobs
 		skeleton.animationPlayer.Play("Hit");
     }
 
-    public override void Dead()
+    public override void Death()
     {
     }
 }
 
-public partial class Skeleton : Mobs, ObjectMove, ObjectAttack
+class DeathStateSkeleton : StateMobs
+{
+	public DeathStateSkeleton(Skeleton skeleton) : base(skeleton) { }
+	
+	public override void Move()
+    {
+    }
+
+    public override void Attack()
+	{
+    }
+
+    public override void Hit()
+    {
+    }
+
+    public override void Death()
+    {
+		skeleton.animationPlayer.Play("Death");
+    }
+}
+
+public partial class Skeleton : Mobs, IMove, IAttack
 {
 	public bool chase = false;
     public StateMobs stateMob;
-    public double delta;
+    public double skeletonDelta;
     public Vector2 playerPosition;
 	public bool checkDamage = false; 
-	int Damage = 20;
+	float Damage = 20f;
+	public Node2D AttackDirection;
 
 	public override void _Ready()
 	{
@@ -133,20 +166,38 @@ public partial class Skeleton : Mobs, ObjectMove, ObjectAttack
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		stateMob = new MoveStateSkeleton(this);
 		Signals.Instance.PlayerPositionUpdate += SetPlayerPosition;
+		Signals.Instance.PlayerAttack += OnDamageReceived;
 		Speed = 150;
 		Health = 100;
+		AttackDirection = GetNode<Node2D>("AttackDirection");
 	}
 	public override void _PhysicsProcess(double delta)
 	{
-		this.delta = delta;
+		skeletonDelta = delta;
 		Move();
 		Attack();
+		stateMob.Hit();
+		stateMob.Death();
 	}
 
 	public void ChangeState(StateMobs newState) 
     {
         stateMob = newState;
     }
+
+	public void OnDamageReceived(float playerDamage)
+	{
+		Health -= playerDamage;
+		if (Health <= 0)
+		{
+			ChangeState(new DeathStateSkeleton(this));
+		}
+		else 
+		{
+			ChangeState(new HitStateSkeleton(this));
+		}
+		GD.Print(Health);
+	}
 
 	public void SetPlayerPosition(Vector2 newPlayerPosition)
 	{
@@ -155,17 +206,6 @@ public partial class Skeleton : Mobs, ObjectMove, ObjectAttack
 
 	public void Move()
 	{
-		GD.Print($"{playerPosition.X} {Position.X}");
-		if (playerPosition.X < Position.X)
-		{
-			GetNode<Area2D>("AttackDirection/AttackRange").Rotate(180f);
-			GetNode<Area2D>("AttackDirection/DamageBox/HitBox").Rotate(180f);
-		}
-		else if (playerPosition.X > Position.X)
-		{
-			GetNode<Area2D>("AttackDirection/AttackRange").Rotate(0);
-			GetNode<Area2D>("AttackDirection/DamageBox/HitBox").Rotate(0);
-		}
 		stateMob.Move();
 	}
 	public void Attack()
@@ -185,7 +225,7 @@ public partial class Skeleton : Mobs, ObjectMove, ObjectAttack
 
 	public void OnHitBox(Area2D area)
 	{
-		Signals.Instance.EmitEnemyAttack(Damage);
+		//Signals.Instance.EmitEnemyAttack(Damage);
 	}
 
 	public void OnAttackRange(Node2D player)
