@@ -394,6 +394,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		animatedPlayer.AnimationFinished += FinishedAnimation;
 		Signals.Instance.EnemyAttack += OnDamageReceived;
 		ChangeState(new MoveStatePlayer(this));
+		Signals.Instance.EmitPlayerHealthChanged(Health);
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -483,6 +484,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			ChangeState(new HitStatePlayer(this));
 		}
+		Signals.Instance.EmitPlayerHealthChanged(Health);
 	}
 
 	public void OnHitBox(Area2D Mobs)

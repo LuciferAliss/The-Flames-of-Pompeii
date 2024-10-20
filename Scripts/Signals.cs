@@ -9,6 +9,8 @@ public partial class Signals : Node
 	public delegate void EnemyAttackEventHandler(float enemyDamage);
 	[Signal]
 	public delegate void PlayerAttackEventHandler(float playerDamage);
+	[Signal]
+	public delegate void PlayerHealthChangedEventHandler(float HP);
 
 	public static Signals Instance { get; private set; }
 
@@ -30,5 +32,10 @@ public partial class Signals : Node
 	public void EmitPlayerAttack(float playerDamage)
     {
         EmitSignal(nameof(PlayerAttack), playerDamage);
+    }
+
+	public void EmitPlayerHealthChanged(float HP)
+    {
+        EmitSignal(nameof(PlayerHealthChanged), HP);
     }
 }

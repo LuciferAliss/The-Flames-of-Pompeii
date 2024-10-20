@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://hfkrhhlv66hh"]
+
+[ext_resource type="Texture2D" uid="uid://dr2wq5mtgqcuy" path="res://Images/HUD/HealthBar/HealthbarUnder.png" id="1_bh47y"]
+[ext_resource type="Script" path="res://Scripts/hud.cs" id="1_fk855"]
+[ext_resource type="Texture2D" uid="uid://cio1xb7j8dp0a" path="res://Images/HUD/HealthBar/HealthbarOver.png" id="2_7bvu2"]
+[ext_resource type="Texture2D" uid="uid://dgb208hurr6n7" path="res://Images/HUD/HealthBar/HealthbarProgress.png" id="3_cbcb5"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_fk855")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 576.0
+offset_bottom = 74.0
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_bh47y")
+texture_over = ExtResource("2_7bvu2")
+texture_progress = ExtResource("3_cbcb5")
+tint_progress = Color(0.62558, 0, 0, 1)
