@@ -262,7 +262,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack2",
-"speed": 13.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -496,7 +496,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_5i4jw"]
-length = 0.384615
+length = 0.555556
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -504,7 +504,7 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0769231, 0.153846, 0.230769, 0.307692),
+"times": PackedFloat32Array(0, 0.111111, 0.222222, 0.333333, 0.444444),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4]
@@ -548,7 +548,7 @@ tracks/3/path = NodePath("../AttackDirection/DamageBox/HitBox/CollisionShape2D:d
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.1, 0.166667, 0.333333),
+"times": PackedFloat32Array(0.0666667, 0.233333, 0.333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -618,6 +618,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["Death"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_ns8pg"]
@@ -792,7 +804,8 @@ metadata/_edit_horizontal_guides_ = [-80.0]
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3.09459, 3.09459)
 sprite_frames = SubResource("SpriteFrames_y4c0q")
-animation = &"Attack1"
+animation = &"Attack2"
+frame = 2
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false

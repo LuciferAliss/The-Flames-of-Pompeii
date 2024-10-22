@@ -46,12 +46,12 @@ class MoveStateSkeleton : StateMobs
 		if(Direction.X < 0)
 		{
 			
-			skeleton.ChangeFlip(true);
+			skeleton.ChangeFlipH(true);
 			skeleton.AttackDirection.RotationDegrees = 180;
 		} 
 		else
 		{
-			skeleton.ChangeFlip(false);
+			skeleton.ChangeFlipH(false);
 			skeleton.AttackDirection.RotationDegrees = 0;
 		}
 
@@ -113,7 +113,25 @@ class HitStateSkeleton : StateMobs
     public override void Hit()
     {
 		skeleton.ChangeAnimate("Hit");
-    }
+		
+		var velocity = skeleton.Velocity;
+		velocity.X = 0;
+
+		if(skeleton.GetFlipH())
+		{
+			velocity.X += 20;
+		}
+		else
+		{
+			velocity.X += -20;
+		}
+
+		var tween = skeleton.GetTree().CreateTween();
+		tween.Parallel().TweenProperty(skeleton, "velocity", Vector2.Zero, 0.6);
+
+		skeleton.Velocity = velocity;
+		skeleton.MoveAndSlide();
+	}
 
     public override void Death()
     {
@@ -188,6 +206,10 @@ public partial class Skeleton : Mobs, IMove, IAttack
 			}
 			else 
 			{
+				if (stateMob is HitStateSkeleton)
+				{
+					animationPlayer.Stop();	
+				}
 				ChangeState(new HitStateSkeleton(this));
 			}
 		}

@@ -23,9 +23,14 @@ public abstract partial class Mobs : CharacterBody2D
         animationPlayer.Play(anim);
     }
 
-    public void ChangeFlip(bool check)
+    public void ChangeFlipH(bool check)
     {
         animated.FlipH = check;
+    }
+
+     public bool GetFlipH()
+    {
+        return animated.FlipH;
     }
 
     public float GetSpeed()

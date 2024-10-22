@@ -159,11 +159,11 @@ class Attack1StatePlayer : StatePlayer
 		if(player.Animated.FlipH)
 		{
 
-			velocity.X += -40;
+			velocity.X += -20;
 		} 
 		else 
 		{
-			velocity.X += 40;
+			velocity.X += 20;
 		}
 		
 		if (Input.IsActionJustPressed("Attack"))
@@ -220,11 +220,11 @@ class Attack2StatePlayer : StatePlayer
 		
 		if(player.Animated.FlipH)
 		{
-			velocity.X += -40;
+			velocity.X += -20;
 		} 
 		else 
 		{
-			velocity.X += 40;
+			velocity.X += 20;
 		}
 
 		if (Input.IsActionJustPressed("Attack"))
@@ -281,11 +281,11 @@ class Attack3StatePlayer : StatePlayer
 		
 		if(player.Animated.FlipH)
 		{
-			velocity.X += -40;
+			velocity.X += -20;
 		} 
 		else 
 		{
-			velocity.X += 40;
+			velocity.X += 20;
 		}
 
 		player.DamageMultiplier = 2f;
@@ -325,7 +325,7 @@ class HitStatePlayer : StatePlayer
 	}
 
 	public override void Hit()
-	{
+	{	
 		player.animatedPlayer.Play("Hit");
 	}
 
@@ -363,13 +363,14 @@ class DeathStatePlayer : StatePlayer
 		Vector2 velocity = player.Velocity;
 		velocity.X = 0; 
 		player.animatedPlayer.Play("Death");
+
 	}
 }
 
 public partial class PlayerCharacter : CharacterBody2D
 {
 	[Export] public float Speed { get; private set; } = 300.0f;
-	[Export] private float Health = 100;
+	private float Health = 100f;
 	[Export] public int DamageBasic { get; private set; } = 10;
 	public float DamageMultiplier = 1;
 	private float DamageCurrent = 0;
@@ -476,6 +477,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	public void OnDamageReceived(float damage)
 	{
 		Health -= damage;
+		Signals.Instance.EmitPlayerHealthChanged(Health);
 		if (Health <= 0)
 		{
 			ChangeState(new DeathStatePlayer(this));
@@ -484,7 +486,6 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			ChangeState(new HitStatePlayer(this));
 		}
-		Signals.Instance.EmitPlayerHealthChanged(Health);
 	}
 
 	public void OnHitBox(Area2D Mobs)
