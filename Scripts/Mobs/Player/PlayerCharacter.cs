@@ -461,14 +461,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 		else if (NameAnime == "Death")
 		{
-			QueueFree();
-			var newScene = (PackedScene)GD.Load("res://Scenes//MainMenu.tscn");
-			var currentScene = GetTree().CurrentScene;
-			var nextSceneInstance = newScene.Instantiate();
-			
-			GetTree().Root.AddChild(nextSceneInstance);
-			GetTree().CurrentScene = nextSceneInstance;
-			currentScene.QueueFree();
+			Signals.Instance.EmitKillLevel();
 			return;
 		}
 		ChangeState(new MoveStatePlayer(this));
