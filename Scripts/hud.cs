@@ -6,8 +6,7 @@ public partial class hud : CanvasLayer
 	private TextureProgressBar HealthBar;
 	public override void _Ready()
 	{
-		HealthBar = GetNode<TextureProgressBar>("HealthBar");
-		HealthBar.Value = 100;
+		HealthBar = GetNode<TextureProgressBar>("Control/HealthBar");
 		Signals.Instance.PlayerHealthChanged += UpdateHealthBar;
 	}
 
@@ -17,7 +16,6 @@ public partial class hud : CanvasLayer
 
 	public override void _ExitTree()
     {
-		GD.Print("frwe");
         Signals.Instance.PlayerHealthChanged -= UpdateHealthBar;
     }
 

@@ -1,14 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://hfkrhhlv66hh"]
+[gd_scene load_steps=10 format=3 uid="uid://hfkrhhlv66hh"]
 
 [ext_resource type="Texture2D" uid="uid://dr2wq5mtgqcuy" path="res://Images/HUD/HealthBar/HealthbarUnder.png" id="1_bh47y"]
 [ext_resource type="Script" path="res://Scripts/hud.cs" id="1_fk855"]
 [ext_resource type="Texture2D" uid="uid://cio1xb7j8dp0a" path="res://Images/HUD/HealthBar/HealthbarOver.png" id="2_7bvu2"]
 [ext_resource type="Texture2D" uid="uid://dgb208hurr6n7" path="res://Images/HUD/HealthBar/HealthbarProgress.png" id="3_cbcb5"]
+[ext_resource type="Texture2D" uid="uid://cvsgwccv41tyl" path="res://Images/HUD/Ability/AbilityRegeneration.png" id="5_k2b6j"]
+[ext_resource type="Texture2D" uid="uid://bwf83fruyoxhy" path="res://Images/HUD/Ability/PowerAbility.png" id="6_2myrf"]
+[ext_resource type="Texture2D" uid="uid://dufox7jiuvsdm" path="res://Images/HUD/Ability/AccelerationAbility.png" id="7_ytb3v"]
+[ext_resource type="Texture2D" uid="uid://b4x4r6lpu5iif" path="res://Images/HUD/Ability/VampirismAbility.png" id="8_qqfw8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4564"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_fk855")
+metadata/_edit_vertical_guides_ = [40.0]
 
-[node name="HealthBar" type="TextureProgressBar" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="Control"]
 offset_left = 40.0
 offset_top = 40.0
 offset_right = 576.0
@@ -19,3 +35,39 @@ texture_under = ExtResource("1_bh47y")
 texture_over = ExtResource("2_7bvu2")
 texture_progress = ExtResource("3_cbcb5")
 tint_progress = Color(0.62558, 0, 0, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 952.0
+offset_right = 648.0
+offset_bottom = 1048.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_r4564")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+
+[node name="AbilityRegeneration" type="TextureRect" parent="Control/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_k2b6j")
+stretch_mode = 4
+
+[node name="PowerAbility" type="TextureRect" parent="Control/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_2myrf")
+stretch_mode = 4
+
+[node name="AccelerationAbility" type="TextureRect" parent="Control/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("7_ytb3v")
+stretch_mode = 4
+
+[node name="VampirismAbility" type="TextureRect" parent="Control/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("8_qqfw8")
+stretch_mode = 4
