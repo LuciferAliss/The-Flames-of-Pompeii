@@ -202,9 +202,13 @@ public partial class Skeleton : Mobs, IMove, IAttack
     	{
 			Health -= playerDamage;
 			var HealthBar = GetNode<TextureProgressBar>("MobHealth/HealthBar");
+			var TextDamage = GetNode<Label>("MobHealth/DamageText");
+			var AnimeText = GetNode<AnimationPlayer>("MobHealth/Animation");
 			HealthBar.Value -= playerDamage;
 			HealthBar.Visible = true;
-			GetNode<Label>("MobHealth/DamageText").Text = playerDamage.ToString();
+			TextDamage.Visible = true;
+			TextDamage.Text = playerDamage.ToString();
+			AnimeText.Play("TextDamage");
 			GD.Print(Health);
 			if (Health <= 0)
 			{
