@@ -24,16 +24,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 784.0
-offset_right = 238.0
-offset_bottom = 830.0
-theme = ExtResource("2_44gmf")
-theme_override_font_sizes/font_size = 40
-text = "123456789"
-
 [node name="HealthBar" type="TextureProgressBar" parent="Control"]
 layout_mode = 0
 offset_left = 40.0
@@ -50,35 +40,80 @@ tint_progress = Color(0.62558, 0, 0, 1)
 [node name="AbilityContainer" type="PanelContainer" parent="Control"]
 layout_mode = 0
 offset_left = 40.0
-offset_top = 952.0
+offset_top = 912.0
 offset_right = 648.0
-offset_bottom = 1048.0
+offset_bottom = 1046.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_r4564")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/AbilityContainer"]
+[node name="HBoxContainerAbility" type="HBoxContainer" parent="Control/AbilityContainer"]
 layout_mode = 2
 
-[node name="AbilityRegeneration" type="TextureRect" parent="Control/AbilityContainer/HBoxContainer"]
+[node name="VBoxContainerRegen" type="VBoxContainer" parent="Control/AbilityContainer/HBoxContainerAbility"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="RegenerationLable" type="Label" parent="Control/AbilityContainer/HBoxContainerAbility/VBoxContainerRegen"]
+layout_mode = 2
+theme = ExtResource("2_44gmf")
+theme_override_font_sizes/font_size = 32
+text = "60 "
+horizontal_alignment = 1
+
+[node name="AbilityRegeneration" type="TextureRect" parent="Control/AbilityContainer/HBoxContainerAbility/VBoxContainerRegen"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource("5_k2b6j")
 stretch_mode = 4
 
-[node name="PowerAbility" type="TextureRect" parent="Control/AbilityContainer/HBoxContainer"]
+[node name="VBoxContainerPower" type="VBoxContainer" parent="Control/AbilityContainer/HBoxContainerAbility"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="PowerLabel" type="Label" parent="Control/AbilityContainer/HBoxContainerAbility/VBoxContainerPower"]
+layout_mode = 2
+theme = ExtResource("2_44gmf")
+theme_override_font_sizes/font_size = 32
+text = "60"
+horizontal_alignment = 1
+
+[node name="PowerAbility" type="TextureRect" parent="Control/AbilityContainer/HBoxContainerAbility/VBoxContainerPower"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("6_2myrf")
 stretch_mode = 4
 
-[node name="AccelerationAbility" type="TextureRect" parent="Control/AbilityContainer/HBoxContainer"]
+[node name="VBoxContainerAcceleration" type="VBoxContainer" parent="Control/AbilityContainer/HBoxContainerAbility"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
+
+[node name="AccelerationLabel" type="Label" parent="Control/AbilityContainer/HBoxContainerAbility/VBoxContainerAcceleration"]
+layout_mode = 2
+theme = ExtResource("2_44gmf")
+theme_override_font_sizes/font_size = 32
+text = "60"
+horizontal_alignment = 1
+
+[node name="AccelerationAbility" type="TextureRect" parent="Control/AbilityContainer/HBoxContainerAbility/VBoxContainerAcceleration"]
+layout_mode = 2
+size_flags_horizontal = 4
 texture = ExtResource("7_ytb3v")
 stretch_mode = 4
 
-[node name="VampirismAbility" type="TextureRect" parent="Control/AbilityContainer/HBoxContainer"]
+[node name="VBoxContainerVampir" type="VBoxContainer" parent="Control/AbilityContainer/HBoxContainerAbility"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="VampirismLabel" type="Label" parent="Control/AbilityContainer/HBoxContainerAbility/VBoxContainerVampir"]
+layout_mode = 2
+theme = ExtResource("2_44gmf")
+theme_override_font_sizes/font_size = 32
+text = "60"
+horizontal_alignment = 1
+
+[node name="VampirismAbility" type="TextureRect" parent="Control/AbilityContainer/HBoxContainerAbility/VBoxContainerVampir"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.0
+size_flags_vertical = 4
 texture = ExtResource("8_qqfw8")
 stretch_mode = 4

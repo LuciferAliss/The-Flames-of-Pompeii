@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bubvf3u8mgm8w"]
+
+[ext_resource type="Script" path="res://Scripts/MobHealth.cs" id="1_6tuwj"]
+[ext_resource type="Texture2D" uid="uid://cpdij5lbgdydm" path="res://Images/HUD/MobsHealthBar/Sprite-0003.png" id="1_77fvo"]
+[ext_resource type="Texture2D" uid="uid://vmvo4lrkm3bd" path="res://Images/HUD/MobsHealthBar/Sprite-0001.png" id="2_shvux"]
+[ext_resource type="Texture2D" uid="uid://brtpn1h7ete5q" path="res://Images/HUD/MobsHealthBar/Sprite-0002.png" id="3_qy7sl"]
+[ext_resource type="Theme" uid="uid://crlbc3up4awdd" path="res://Images/Theme/Theme.tres" id="4_ng14s"]
+
+[node name="MobHealth" type="Node2D"]
+script = ExtResource("1_6tuwj")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+modulate = Color(1, 1, 1, 0.607843)
+offset_left = -40.0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = 8.0
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_77fvo")
+texture_over = ExtResource("2_shvux")
+texture_progress = ExtResource("3_qy7sl")
+tint_progress = Color(0.717647, 0.00784314, 0.168627, 1)
+
+[node name="DamageText" type="Label" parent="."]
+offset_left = -24.0
+offset_top = -28.0
+offset_right = 24.0
+offset_bottom = -9.0
+theme = ExtResource("4_ng14s")
+theme_override_colors/font_color = Color(0.756863, 0, 0, 1)
+text = "60"
+horizontal_alignment = 1
