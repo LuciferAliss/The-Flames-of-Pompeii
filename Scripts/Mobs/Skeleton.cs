@@ -169,6 +169,7 @@ public partial class Skeleton : Mobs, IMove, IAttack
 	public bool checkDamage = false; 
 	float Damage = 20f;
 	public Node2D AttackDirection;
+	TextureProgressBar HealthBar;
 
 	public override void _Ready()
 	{
@@ -180,7 +181,9 @@ public partial class Skeleton : Mobs, IMove, IAttack
 		Speed = 150;
 		Health = 100;
 		AttackDirection = GetNode<Node2D>("AttackDirection");
-		GetNode<TextureProgressBar>("MobHealth/HealthBar").Value = Health;
+		HealthBar = GetNode<TextureProgressBar>("MobHealth/HealthBar");
+		HealthBar.Value = Health;
+		HealthBar.Visible = false;
 	}
 	public override void _PhysicsProcess(double delta)
 	{	
@@ -201,21 +204,21 @@ public partial class Skeleton : Mobs, IMove, IAttack
 		if (IsPlayerInRange())
     	{
 			Health -= playerDamage;
-			var HealthBar = GetNode<TextureProgressBar>("MobHealth/HealthBar");
 			var TextDamage = GetNode<Label>("MobHealth/DamageText");
 			var AnimeText = GetNode<AnimationPlayer>("MobHealth/Animation");
 			HealthBar.Value -= playerDamage;
 			HealthBar.Visible = true;
-			TextDamage.Visible = true;
 			TextDamage.Text = playerDamage.ToString();
+			AnimeText.Stop();
 			AnimeText.Play("TextDamage");
-			GD.Print(Health);
 			if (Health <= 0)
 			{
+				TextDamage.Visible = false;
 				ChangeState(new DeathStateSkeleton(this));
 			}
 			else 
 			{
+				TextDamage.Visible = true;
 				if (stateMob is HitStateSkeleton)
 				{
 					animationPlayer.Stop();	

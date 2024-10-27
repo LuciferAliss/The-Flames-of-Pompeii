@@ -54,6 +54,9 @@ public abstract class StatePlayer
 	public abstract void Attack3();
 	public abstract void Hit();
 	public abstract void Death();
+	public abstract void Regeneration();
+	public abstract void Power();
+	public abstract void Acceleration();
 }
 
 class MoveStatePlayer : StatePlayer
@@ -104,7 +107,7 @@ class MoveStatePlayer : StatePlayer
 			player.DamageBox.RotationDegrees = 0;
 		}
 
-		if (velocity.Y > 7)
+		if (velocity.Y > 0)
 		{
 			player.animatedPlayer.Play("Fall");
 		}
@@ -134,6 +137,27 @@ class MoveStatePlayer : StatePlayer
 	}
 
 	public override void Death()
+	{
+	}
+
+    public override void Regeneration()
+    {
+
+		if (Input.IsActionJustPressed("AbilityRegeneration") && player.GetNode<hud>("HUD").CooldownAbility[0] == false)
+		{
+			player.ChangeState(new RegenerationState(player));
+		}
+    }
+
+	public override void Power()
+    {
+		if (Input.IsActionJustPressed("PowerAbility") && player.GetNode<hud>("HUD").CooldownAbility[1] == false && player.GetNode<hud>("HUD").useAbility[0] == false)
+		{
+			player.ChangeState(new PowerState(player));
+		}
+	}
+
+	public override void Acceleration()
 	{
 	}
 }
@@ -194,6 +218,18 @@ class Attack1StatePlayer : StatePlayer
 	public override void Death()
 	{
 	}
+
+	public override void Regeneration()
+    {
+    }
+
+	public override void Power()
+    {
+	}
+
+	public override void Acceleration()
+	{
+	}
 }
 
 class Attack2StatePlayer : StatePlayer
@@ -251,6 +287,18 @@ class Attack2StatePlayer : StatePlayer
 	public override void Death()
 	{
 	}
+
+	public override void Regeneration()
+    {
+    }
+
+	public override void Power()
+    {
+	}
+
+	public override void Acceleration()
+	{
+	}
 }
 
 class Attack3StatePlayer : StatePlayer
@@ -302,6 +350,18 @@ class Attack3StatePlayer : StatePlayer
 	public override void Death()
 	{
 	}
+
+	public override void Regeneration()
+    {
+    }
+
+	public override void Power()
+    {
+	}
+
+	public override void Acceleration()
+	{
+	}
 }
 
 class HitStatePlayer : StatePlayer
@@ -330,6 +390,18 @@ class HitStatePlayer : StatePlayer
 	}
 
 	public override void Death()
+	{
+	}
+
+	public override void Regeneration()
+    {
+    }
+
+	public override void Power()
+    {
+	}
+
+	public override void Acceleration()
 	{
 	}
 }
@@ -362,26 +434,173 @@ class DeathStatePlayer : StatePlayer
 	{
 		Vector2 velocity = player.Velocity;
 		velocity.X = 0; 
-		player.animatedPlayer.Play("Death");
 
+		if (!player.IsOnFloor())
+		{
+			velocity += player.GetGravity() * (float)player.deltaPlayer;
+		}
+
+		player.Velocity = velocity;
+		player.MoveAndSlide();
+
+		player.animatedPlayer.Play("Death");
+	}
+
+	public override void Regeneration()
+    {
+    }
+
+	public override void Power()
+    {
+	}
+
+	public override void Acceleration()
+	{
+	}
+}
+
+class RegenerationState : StatePlayer
+{
+	public RegenerationState(PlayerCharacter player) : base(player) { }
+
+	public override void Move()
+	{
+	}
+
+    public override void Attack1()
+    { 
+	}
+
+	public override void Attack2()
+	{
+	}
+
+	public override void Attack3()
+	{
+	}
+
+	public override void Hit()
+	{
+	}
+
+	public override void Death()
+	{
+	}
+
+	public override void Regeneration()
+    {
+		player.animatedPlayer.Play("AbilityRegeneration");
+		Signals.Instance.EmitRegenerationHealthAbility();
+	}
+
+	public override void Power()
+    {
+	}
+
+	public override void Acceleration()
+	{
+	}
+}
+
+class PowerState : StatePlayer
+{
+	public PowerState(PlayerCharacter player) : base(player) { }
+
+	public override void Move()
+	{
+	}
+
+    public override void Attack1()
+    { 
+	}
+
+	public override void Attack2()
+	{
+	}
+
+	public override void Attack3()
+	{
+	}
+
+	public override void Hit()
+	{
+	}
+
+	public override void Death()
+	{
+	}
+
+	public override void Regeneration()
+    {
+	}
+
+	public override void Power()
+    {
+		player.animatedPlayer.Play("PowerAbility");
+		Signals.Instance.EmitPowerAbility();
+	}
+
+	public override void Acceleration()
+	{
+	}
+}
+
+class AccelerationState : StatePlayer
+{
+	public AccelerationState(PlayerCharacter player) : base(player) { }
+
+	public override void Move()
+	{
+	}
+
+    public override void Attack1()
+    { 
+	}
+
+	public override void Attack2()
+	{
+	}
+
+	public override void Attack3()
+	{
+	}
+
+	public override void Hit()
+	{
+	}
+
+	public override void Death()
+	{
+	}
+
+	public override void Regeneration()
+    {
+	}
+
+	public override void Power()
+    {
+	}
+
+	public override void Acceleration()
+	{
 	}
 }
 
 public partial class PlayerCharacter : CharacterBody2D
 {
 	[Export] public float Speed { get; private set; } = 300.0f;
-	private float Health = 100f;
+	[Export] public float Health { get; private set; } = 100f;
 	[Export] public int DamageBasic { get; private set; } = 10;
 	public float DamageMultiplier = 1;
-	private float DamageCurrent = 0;
+	public float DamageCurrent = 0;
 	public const float JumpVelocity = -450.0f;
 	public double deltaPlayer { get; private set; }
 	public static CharacterBody2D Instance { get; private set; }
 	public AnimatedSprite2D Animated { get; private set; }
 	public AnimationPlayer animatedPlayer { get; private set; }
 	public StatePlayer state { get; private set; }
-	public bool combo1 {get; set; } = false;
-	public bool combo2 {get; set; } = false;
+	public bool combo1 { get; set; } = false;
+	public bool combo2 { get; set; } = false;
 	public Expectation expectation = new();
 	public Node2D DamageBox;
 
@@ -394,8 +613,10 @@ public partial class PlayerCharacter : CharacterBody2D
 		Input.MouseMode = Input.MouseModeEnum.Hidden;
 		animatedPlayer.AnimationFinished += FinishedAnimation;
 		Signals.Instance.EnemyAttack += OnDamageReceived;
+		Signals.Instance.PlayerRegenerationHealth += Regeneration;
 		ChangeState(new MoveStatePlayer(this));
 		Signals.Instance.EmitPlayerHealthChanged(Health);
+		
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -407,6 +628,8 @@ public partial class PlayerCharacter : CharacterBody2D
 		state.Attack3();
 		state.Hit();
 		state.Death();
+		state.Regeneration();
+		state.Power();
 		Signals.Instance.EmitPositionUpdate(Position);
 		DamageCurrent = DamageBasic * DamageMultiplier;
 	}	
@@ -483,6 +706,15 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	public void OnHitBox(Area2D Mobs)
 	{
+		if(GetNode<hud>("HUD").useAbility[0])
+		{
+			DamageCurrent += DamageCurrent / 100 * 30;
+		}
 		Signals.Instance.EmitPlayerAttack(DamageCurrent);
+	}
+
+	public void Regeneration(double HP)
+	{
+		Health = (float)HP;
 	}
 }

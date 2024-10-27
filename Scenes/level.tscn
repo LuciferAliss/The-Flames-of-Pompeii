@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://lufjn30bgu8i"]
+[gd_scene load_steps=17 format=4 uid="uid://lufjn30bgu8i"]
 
 [ext_resource type="Script" path="res://Scenes/Level.cs" id="1_854x5"]
 [ext_resource type="Texture2D" uid="uid://cfcyly41fpxwv" path="res://Images/ForestLocation/Layer_0001_8.png" id="2_10wj3"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://cwbpvf3rih8a0" path="res://Images/ForestLocation/Layer_0003_6.png" id="9_fntc7"]
 [ext_resource type="Texture2D" uid="uid://cppciuren5q8g" path="res://Images/ForestLocation/Layer_0002_7.png" id="10_x2j7m"]
 [ext_resource type="PackedScene" uid="uid://ddnr78qxhgkud" path="res://Scenes/Mobs/skeleton.tscn" id="13_vrrl3"]
-[ext_resource type="PackedScene" uid="uid://hfkrhhlv66hh" path="res://Scenes/hud.tscn" id="15_mcoe4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e676g"]
 texture = ExtResource("3_w06gs")
@@ -428,5 +427,3 @@ position = Vector2(1216, 904)
 
 [node name="PlayerCharacter" parent="Player" instance=ExtResource("4_4paiy")]
 position = Vector2(504, 896)
-
-[node name="HUD" parent="." instance=ExtResource("15_mcoe4")]

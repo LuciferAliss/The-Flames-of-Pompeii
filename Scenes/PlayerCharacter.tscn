@@ -1,10 +1,11 @@
-[gd_scene load_steps=118 format=3 uid="uid://ddccoh7nrxpdb"]
+[gd_scene load_steps=122 format=3 uid="uid://ddccoh7nrxpdb"]
 
 [ext_resource type="Script" path="res://Scripts/Mobs/Player/PlayerCharacter.cs" id="1_mc5ph"]
 [ext_resource type="Texture2D" uid="uid://0ari6cgh1e5b" path="res://Images/Model/Player/GG1.png" id="2_3fc3c"]
 [ext_resource type="PackedScene" uid="uid://snvte4y1bve1" path="res://Scenes/DamageBox/DamageBox.tscn" id="3_j6cwn"]
 [ext_resource type="Texture2D" uid="uid://cw3fvosqalmv" path="res://Images/Model/Player/GG2.png" id="3_mnqwo"]
 [ext_resource type="Texture2D" uid="uid://cjaq7kgkosoef" path="res://Images/Model/Player/GG (2).png" id="3_xnv1m"]
+[ext_resource type="PackedScene" uid="uid://hfkrhhlv66hh" path="res://Scenes/hud.tscn" id="6_8e5jb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p1vm4"]
 atlas = ExtResource("3_mnqwo")
@@ -791,6 +792,33 @@ tracks/1/keys = {
 "values": ["AbilityRegeneration"]
 }
 
+[sub_resource type="Animation" id="Animation_0nivg"]
+length = 0.785714
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0714286, 0.142857, 0.214286, 0.285714, 0.357143, 0.428571, 0.5, 0.571429, 0.642857, 0.714286),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["AccelerationAbility"]
+}
+
 [sub_resource type="Animation" id="Animation_j5dub"]
 length = 0.384615
 tracks/0/type = "value"
@@ -1095,6 +1123,33 @@ tracks/1/keys = {
 "values": ["Jump"]
 }
 
+[sub_resource type="Animation" id="Animation_bykmp"]
+length = 0.785714
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0714286, 0.142857, 0.214286, 0.285714, 0.357143, 0.428571, 0.5, 0.571429, 0.642857, 0.714286),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["PowerAbility"]
+}
+
 [sub_resource type="Animation" id="Animation_bi2x1"]
 length = 0.001
 tracks/0/type = "value"
@@ -1137,9 +1192,37 @@ tracks/1/keys = {
 "values": ["Run"]
 }
 
+[sub_resource type="Animation" id="Animation_aahta"]
+length = 0.785714
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0714286, 0.142857, 0.214286, 0.285714, 0.357143, 0.428571, 0.5, 0.571429, 0.642857, 0.714286),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["VampirismAbility"]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tko55"]
 _data = {
 "AbilityRegeneration": SubResource("Animation_lfogj"),
+"AccelerationAbility": SubResource("Animation_0nivg"),
 "Attack1": SubResource("Animation_j5dub"),
 "Attack2": SubResource("Animation_5i4jw"),
 "Attack3": SubResource("Animation_dnkp8"),
@@ -1148,8 +1231,10 @@ _data = {
 "Hit": SubResource("Animation_vxj2i"),
 "Idle": SubResource("Animation_tm6yg"),
 "Jump": SubResource("Animation_445c1"),
+"PowerAbility": SubResource("Animation_bykmp"),
 "RESET": SubResource("Animation_bi2x1"),
-"Run": SubResource("Animation_78hs7")
+"Run": SubResource("Animation_78hs7"),
+"VampirismAbility": SubResource("Animation_aahta")
 }
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
@@ -1160,7 +1245,7 @@ metadata/_edit_horizontal_guides_ = [-80.0]
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3.09459, 3.09459)
 sprite_frames = SubResource("SpriteFrames_y4c0q")
-animation = &"PowerAbility"
+animation = &"AccelerationAbility"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
@@ -1195,6 +1280,8 @@ collision_mask = 32
 position = Vector2(56, 0)
 scale = Vector2(0.6, 0.6)
 disabled = false
+
+[node name="HUD" parent="." instance=ExtResource("6_8e5jb")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="FinishedAnimation"]
 [connection signal="area_entered" from="AttackDirection/DamageBox/HitBox" to="." method="OnHitBox"]

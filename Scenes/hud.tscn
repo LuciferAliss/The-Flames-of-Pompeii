@@ -6,7 +6,7 @@
 [ext_resource type="Theme" uid="uid://crlbc3up4awdd" path="res://Images/Theme/Theme.tres" id="2_44gmf"]
 [ext_resource type="Texture2D" uid="uid://dgb208hurr6n7" path="res://Images/HUD/HealthBar/HealthbarProgress.png" id="3_cbcb5"]
 [ext_resource type="Texture2D" uid="uid://cvsgwccv41tyl" path="res://Images/HUD/Ability/AbilityRegeneration.png" id="5_k2b6j"]
-[ext_resource type="Texture2D" uid="uid://bwf83fruyoxhy" path="res://Images/HUD/Ability/PowerAbility.png" id="6_2myrf"]
+[ext_resource type="Texture2D" uid="uid://bfernk67600e6" path="res://Images/HUD/Ability/PowerAbility.png" id="6_2myrf"]
 [ext_resource type="Texture2D" uid="uid://dufox7jiuvsdm" path="res://Images/HUD/Ability/AccelerationAbility.png" id="7_ytb3v"]
 [ext_resource type="Texture2D" uid="uid://b4x4r6lpu5iif" path="res://Images/HUD/Ability/VampirismAbility.png" id="8_qqfw8"]
 
@@ -52,11 +52,11 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="RegenerationLable" type="Label" parent="Control/AbilityContainer/HBoxContainerAbility/VBoxContainerRegen"]
+[node name="RegenerationLabel" type="Label" parent="Control/AbilityContainer/HBoxContainerAbility/VBoxContainerRegen"]
 layout_mode = 2
 theme = ExtResource("2_44gmf")
 theme_override_font_sizes/font_size = 32
-text = "60 "
+text = "60"
 horizontal_alignment = 1
 
 [node name="AbilityRegeneration" type="TextureRect" parent="Control/AbilityContainer/HBoxContainerAbility/VBoxContainerRegen"]

@@ -16,7 +16,6 @@ public partial class Level : Node2D
 
     public override void _ExitTree()
     {
-		GD.Print("frwe");
         Signals.Instance.KillLevel -= KillLevel;
     }
 
@@ -25,7 +24,6 @@ public partial class Level : Node2D
 		var newScene = (PackedScene)GD.Load("res://Scenes//MainMenu.tscn");
 		var currentScene = GetTree().CurrentScene;
 		GetNode<Node2D>("Mobs").QueueFree();
-		GetNode<CanvasLayer>("HUD").QueueFree();
 		GetNode<Node2D>("Player").QueueFree();
 		currentScene.QueueFree();
 

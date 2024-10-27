@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfernk67600e6"
-path="res://.godot/imported/PowerAbility.png-e236645a5d7f55bc13e1bb49ac2cde03.ctex"
+uid="uid://v1ojlivjk43h"
+path="res://.godot/imported/5.png-53a2cda4202928a5e458aa296f48ba69.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/HUD/Ability/PowerAbility.png"
-dest_files=["res://.godot/imported/PowerAbility.png-e236645a5d7f55bc13e1bb49ac2cde03.ctex"]
+source_file="res://Images/CaveLocation/BG/5.png"
+dest_files=["res://.godot/imported/5.png-53a2cda4202928a5e458aa296f48ba69.ctex"]
 
 [params]
 

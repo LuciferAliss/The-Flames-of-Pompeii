@@ -13,6 +13,12 @@ public partial class Signals : Node
 	public delegate void PlayerHealthChangedEventHandler(float HP);
 	[Signal]
 	public delegate void KillLevelEventHandler();
+	[Signal]
+	public delegate void PlayerRegenerationHealthEventHandler(double HP);
+	[Signal]
+	public delegate void RegenerationHealthAbilityEventHandler();
+	[Signal]
+	public delegate void PowerAbilityEventHandler();
 
 	public static Signals Instance { get; private set; }
 
@@ -45,4 +51,19 @@ public partial class Signals : Node
     {
         EmitSignal(nameof(KillLevel));
     }
+
+	public void EmitPlayerRegenerationHealth(double HP)
+	{
+		EmitSignal(nameof(PlayerRegenerationHealth), HP);
+	}
+
+	public void EmitRegenerationHealthAbility()
+	{
+		EmitSignal(nameof(RegenerationHealthAbility));
+	}
+
+	public void EmitPowerAbility()
+	{
+		EmitSignal(nameof(PowerAbility));
+	}
 }
