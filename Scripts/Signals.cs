@@ -19,6 +19,10 @@ public partial class Signals : Node
 	public delegate void RegenerationHealthAbilityEventHandler();
 	[Signal]
 	public delegate void PowerAbilityEventHandler();
+	[Signal]
+	public delegate void AccelerationAbilityEventHandler();
+	[Signal]
+	public delegate void VampirismAbilityEventHandler();
 
 	public static Signals Instance { get; private set; }
 
@@ -65,5 +69,15 @@ public partial class Signals : Node
 	public void EmitPowerAbility()
 	{
 		EmitSignal(nameof(PowerAbility));
+	}
+
+	public void EmitAccelerationAbility()
+	{
+		EmitSignal(nameof(AccelerationAbility));
+	}
+
+	public void EmitVampirismAbility()
+	{
+		EmitSignal(nameof(VampirismAbility));
 	}
 }
