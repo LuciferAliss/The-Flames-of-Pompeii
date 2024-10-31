@@ -83,17 +83,17 @@ public partial class hud : CanvasLayer
 		if (CooldownAbility[0])
 		{
 			var AbilityRegeneration = GetNode<TextureRect>("Control/AbilityContainer/HBoxContainerAbility/VBoxContainerRegen/AbilityRegeneration");
-			var RegenerationLable = GetNode<Label>("Control/AbilityContainer/HBoxContainerAbility/VBoxContainerRegen/RegenerationLabel");
-			RegenerationLable.Modulate = new Color(1, 1, 1, 1);
+			var RegenerationLabel = GetNode<Label>("Control/AbilityContainer/HBoxContainerAbility/VBoxContainerRegen/RegenerationLabel");
+			RegenerationLabel.Modulate = new Color(1, 1, 1, 1);
 
 			currentCooldown[0] -= (float)delta;
-			RegenerationLable.Text = ((int) currentCooldown[0]).ToString();
+			RegenerationLabel.Text = ((int) currentCooldown[0]).ToString();
 
 			if (currentCooldown[0] <= 0)
 			{
 				CooldownAbility[0] = false;
 				AbilityRegeneration.Modulate = new Color(0.2f, 0.2f, 0.2f);
-				RegenerationLable.Modulate = new Color(1, 1, 1, 0);
+				RegenerationLabel.Modulate = new Color(1, 1, 1, 0);
 			}
 		}
 	}
@@ -110,11 +110,11 @@ public partial class hud : CanvasLayer
 		if (useAbility[0])
 		{
 			var AbilityPower = GetNode<TextureRect>("Control/AbilityContainer/HBoxContainerAbility/VBoxContainerPower/PowerAbility");
-			var PowerLable = GetNode<Label>("Control/AbilityContainer/HBoxContainerAbility/VBoxContainerPower/PowerLabel");
-			PowerLable.Modulate = new Color(1, 0.5f, 0, 1);
+			var PowerLabel = GetNode<Label>("Control/AbilityContainer/HBoxContainerAbility/VBoxContainerPower/PowerLabel");
+			PowerLabel.Modulate = new Color(1, 0.5f, 0, 1);
 
 			currentTimeUseAbility[0] -= (float)delta;
-			PowerLable.Text = ((int) currentTimeUseAbility[0]).ToString();
+			PowerLabel.Text = ((int) currentTimeUseAbility[0]).ToString();
 
 			if (currentTimeUseAbility[0] <= 0)
 			{
@@ -122,7 +122,7 @@ public partial class hud : CanvasLayer
 				CooldownAbility[1] = true;
 				currentCooldown[1] = cooldownTime[1];
 				AbilityPower.Modulate = new Color(0.2f, 0.2f, 0.2f);
-				PowerLable.Modulate = new Color(1, 1, 1, 1);
+				PowerLabel.Modulate = new Color(1, 1, 1, 1);
 			}
 		}
 	}
@@ -132,17 +132,17 @@ public partial class hud : CanvasLayer
 		if (CooldownAbility[1])
 		{
 			var AbilityPower = GetNode<TextureRect>("Control/AbilityContainer/HBoxContainerAbility/VBoxContainerPower/PowerAbility");
-			var PowerLable = GetNode<Label>("Control/AbilityContainer/HBoxContainerAbility/VBoxContainerPower/PowerLabel");
-			PowerLable.Modulate = new Color(1, 1, 1, 1);
+			var PowerLabel = GetNode<Label>("Control/AbilityContainer/HBoxContainerAbility/VBoxContainerPower/PowerLabel");
+			PowerLabel.Modulate = new Color(1, 1, 1, 1);
 
 			currentCooldown[1] -= (float)delta;
-			PowerLable.Text = ((int) currentCooldown[1]).ToString();
+			PowerLabel.Text = ((int) currentCooldown[1]).ToString();
 
 			if (currentCooldown[1] <= 0)
 			{
 				CooldownAbility[1] = false;
 				AbilityPower.Modulate = new Color(1, 1, 1);
-				PowerLable.Modulate = new Color(1, 1, 1, 0);
+				PowerLabel.Modulate = new Color(1, 1, 1, 0);
 			}
 		}
 	}
@@ -209,7 +209,7 @@ public partial class hud : CanvasLayer
 		{
 			var VampirismAbility = GetNode<TextureRect>("Control/AbilityContainer/HBoxContainerAbility/VBoxContainerVampir/VampirismAbility");
 			var VampirismLabel = GetNode<Label>("Control/AbilityContainer/HBoxContainerAbility/VBoxContainerVampir/VampirismLabel");
-			VampirismLabel.Modulate = new Color(0.678431f, 0.847059f, 0.901961f, 1);
+			VampirismLabel.Modulate = new Color(0.627451f, 0.12549f, 0.941176f, 1);
 
 			currentTimeUseAbility[2] -= (float)delta;
 			VampirismLabel.Text = ((int) currentTimeUseAbility[2]).ToString();

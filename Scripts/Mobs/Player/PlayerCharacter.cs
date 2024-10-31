@@ -747,17 +747,17 @@ public partial class PlayerCharacter : CharacterBody2D
         state = newState;
     }
 
-	public void Combo1()
+	private void Combo1()
 	{
 		combo1 = true;
 	}
 
-	public void Combo2()
+	private void Combo2()
 	{
 		combo2 = true;
 	}
 
-	public void FinishedAnimation(StringName NameAnime)
+	private void FinishedAnimation(StringName NameAnime)
 	{
 		if (NameAnime == "Attack1")
 		{
@@ -798,7 +798,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		ChangeState(new MoveStatePlayer(this));
 	}
 	
-	public void OnDamageReceived(float damage)
+	private void OnDamageReceived(float damage)
 	{
 		Health -= damage;
 		Signals.Instance.EmitPlayerHealthChanged(Health);
@@ -812,19 +812,25 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 	}
 
-	public void OnHitBox(Area2D Mobs)
+	private void OnHitBox(Area2D Mobs)
 	{
 		if(GetNode<hud>("HUD").useAbility[0])
 		{
 			DamageCurrent += DamageCurrent / 100 * 60;
 		}
 		
-		float RegenerationHealth = DamageCurrent / 100 * 30; 
-		Signals.Instance.EmitPlayerRegenerationHealth(RegenerationHealth);
 		Signals.Instance.EmitPlayerAttack(DamageCurrent);
+
+		if (GetNode<hud>("HUD").useAbility[2])
+		{
+			float RegenerationHealth = DamageCurrent / 100 * 30; 
+			var targetHP = Math.Min(RegenerationHealth + Health, 100);
+			Health = targetHP;
+			Signals.Instance.EmitPlayerHealthChanged(Health);
+		}
 	}
 
-	public void Regeneration(double HP)
+	private void Regeneration(double HP)
 	{
 		Health = (float)HP;
 	}

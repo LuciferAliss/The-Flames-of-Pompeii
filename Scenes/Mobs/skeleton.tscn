@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://ddnr78qxhgkud"]
+[gd_scene load_steps=61 format=3 uid="uid://ddnr78qxhgkud"]
 
 [ext_resource type="Script" path="res://Scripts/Mobs/Skeleton.cs" id="1_eokjm"]
 [ext_resource type="Texture2D" uid="uid://bweesuodl5ibv" path="res://Images/Model/Skeleton/Sprite.png" id="1_jodmt"]
@@ -81,32 +81,17 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-
-[sub_resource type="Animation" id="Animation_unr2u"]
-length = 1.625
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1, 1.125, 1.25, 1.375, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackDirection/DamageBox/HurBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": ["Die"]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_d32g4"]
@@ -176,6 +161,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackDirection/DamageBox/HurBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_loglr"]
 length = 1.33333
@@ -208,7 +205,6 @@ tracks/1/keys = {
 _data = {
 "Attack": SubResource("Animation_6deym"),
 "Death": SubResource("Animation_321wu"),
-"Die": SubResource("Animation_unr2u"),
 "Hit": SubResource("Animation_d32g4"),
 "Idle": SubResource("Animation_k72lu"),
 "RESET": SubResource("Animation_7kim2"),
@@ -580,7 +576,8 @@ libraries = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2.375, 2.375)
 sprite_frames = SubResource("SpriteFrames_015nw")
-animation = &"Idle"
+animation = &"Attack"
+frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
