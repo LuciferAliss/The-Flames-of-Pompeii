@@ -762,7 +762,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5y2bv"]
-radius = 23.0
+radius = 24.0
 height = 96.0
 
 [sub_resource type="Animation" id="Animation_lfogj"]
@@ -1245,10 +1245,11 @@ metadata/_edit_horizontal_guides_ = [-80.0]
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3.09459, 3.09459)
 sprite_frames = SubResource("SpriteFrames_y4c0q")
-animation = &"VampirismAbility"
+animation = &"AbilityRegeneration"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(0, 8)
+scale = Vector2(0.95, 0.95)
 shape = SubResource("CapsuleShape2D_5y2bv")
 
 [node name="Camera2D" type="Camera2D" parent="."]

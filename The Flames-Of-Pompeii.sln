@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "The Flames-Of-Pompeii", "Th
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp8", "..\Project\ConsoleApp8\ConsoleApp8.csproj", "{0F8CCC98-06A3-49E2-906F-FC8F269FE839}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp100", "..\Project\ConsoleApp100\ConsoleApp100.csproj", "{C812A521-9100-4D56-A901-C0C3268E041E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPO lr2", "..\Project\TPO lr2\TPO lr2.csproj", "{F1DEAE6F-1A22-487F-B49F-753074832A99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,5 +27,17 @@ Global
 		{0F8CCC98-06A3-49E2-906F-FC8F269FE839}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
 		{0F8CCC98-06A3-49E2-906F-FC8F269FE839}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
 		{0F8CCC98-06A3-49E2-906F-FC8F269FE839}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+		{C812A521-9100-4D56-A901-C0C3268E041E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C812A521-9100-4D56-A901-C0C3268E041E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C812A521-9100-4D56-A901-C0C3268E041E}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C812A521-9100-4D56-A901-C0C3268E041E}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{C812A521-9100-4D56-A901-C0C3268E041E}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{C812A521-9100-4D56-A901-C0C3268E041E}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+		{F1DEAE6F-1A22-487F-B49F-753074832A99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1DEAE6F-1A22-487F-B49F-753074832A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1DEAE6F-1A22-487F-B49F-753074832A99}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1DEAE6F-1A22-487F-B49F-753074832A99}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{F1DEAE6F-1A22-487F-B49F-753074832A99}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1DEAE6F-1A22-487F-B49F-753074832A99}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

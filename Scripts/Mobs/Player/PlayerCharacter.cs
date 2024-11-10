@@ -115,8 +115,8 @@ class MoveStatePlayer : StatePlayer
 			player.Animated.FlipH = false;
 			player.DamageBox.RotationDegrees = 0;
 		}
-
-		if (velocity.Y > 0)
+		
+		if (velocity.Y > 315)
 		{
 			player.animatedPlayer.Play("Fall");
 		}
