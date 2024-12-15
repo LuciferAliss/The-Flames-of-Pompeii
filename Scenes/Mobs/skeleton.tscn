@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Mobs/Skeleton.cs" id="1_eokjm"]
 [ext_resource type="Texture2D" uid="uid://bweesuodl5ibv" path="res://Images/Model/Skeleton/Sprite.png" id="1_jodmt"]
 [ext_resource type="PackedScene" uid="uid://snvte4y1bve1" path="res://Scenes/DamageBox/DamageBox.tscn" id="3_key14"]
-[ext_resource type="PackedScene" uid="uid://i6syuendalt0" path="res://Scenes/MobHealth.tscn" id="4_cw7fb"]
+[ext_resource type="PackedScene" path="res://Scenes/MobHealth.tscn" id="4_cw7fb"]
 
 [sub_resource type="Animation" id="Animation_6deym"]
 tracks/0/type = "value"

@@ -31,6 +31,7 @@ offset_bottom = 1055.0
 texture = ExtResource("10_0mglg")
 
 [node name="AbilityContainer" type="PanelContainer" parent="Control"]
+layout_mode = 0
 offset_left = 153.0
 offset_top = 883.0
 offset_right = 481.0
@@ -129,6 +130,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="HealthBar" type="TextureProgressBar" parent="Control"]
+layout_mode = 0
 offset_left = 86.0
 offset_top = 1003.0
 offset_right = 528.0
