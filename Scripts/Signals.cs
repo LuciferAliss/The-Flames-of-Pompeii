@@ -9,6 +9,20 @@ public partial class Signals : Node
 	public delegate void EnemyAttackEventHandler(float enemyDamage);
 	[Signal]
 	public delegate void PlayerAttackEventHandler(float playerDamage);
+	[Signal]
+	public delegate void PlayerHealthChangedEventHandler(float HP);
+	[Signal]
+	public delegate void KillLevelEventHandler();
+	[Signal]
+	public delegate void PlayerRegenerationHealthEventHandler(double HP);
+	[Signal]
+	public delegate void RegenerationHealthAbilityEventHandler();
+	[Signal]
+	public delegate void PowerAbilityEventHandler();
+	[Signal]
+	public delegate void AccelerationAbilityEventHandler();
+	[Signal]
+	public delegate void VampirismAbilityEventHandler();
 
 	public static Signals Instance { get; private set; }
 
@@ -31,4 +45,39 @@ public partial class Signals : Node
     {
         EmitSignal(nameof(PlayerAttack), playerDamage);
     }
+
+	public void EmitPlayerHealthChanged(float HP)
+    {
+        EmitSignal(nameof(PlayerHealthChanged), HP);
+    }
+
+	public void EmitKillLevel()
+    {
+        EmitSignal(nameof(KillLevel));
+    }
+
+	public void EmitPlayerRegenerationHealth(double HP)
+	{
+		EmitSignal(nameof(PlayerRegenerationHealth), HP);
+	}
+
+	public void EmitRegenerationHealthAbility()
+	{
+		EmitSignal(nameof(RegenerationHealthAbility));
+	}
+
+	public void EmitPowerAbility()
+	{
+		EmitSignal(nameof(PowerAbility));
+	}
+
+	public void EmitAccelerationAbility()
+	{
+		EmitSignal(nameof(AccelerationAbility));
+	}
+
+	public void EmitVampirismAbility()
+	{
+		EmitSignal(nameof(VampirismAbility));
+	}
 }

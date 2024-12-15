@@ -1,11 +1,5 @@
 Permission=1920x1080
-Fullscreen=True
-<<<<<<< Updated upstream
-GlobalBrightness=1,0591906
-VolumeMusic=-49,951313
-VolumeSoundEffects=-18,832506
-=======
-GlobalBrightness=1,0346657
-VolumeMusic=-80
-VolumeSoundEffects=-14,69375
->>>>>>> Stashed changes
+Fullscreen=False
+GlobalBrightness=1,0206518
+VolumeMusic=-8,364482
+VolumeSoundEffects=6

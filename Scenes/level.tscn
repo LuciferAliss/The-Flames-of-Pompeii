@@ -401,6 +401,7 @@ motion_mirroring = Vector2(1920.14, 0)
 position = Vector2(964, 264)
 scale = Vector2(2.09483, 2.06368)
 texture = ExtResource("10_x2j7m")
+metadata/_edit_lock_ = true
 
 [node name="Layer10" type="ParallaxLayer" parent="BG"]
 motion_mirroring = Vector2(1920.14, 0)
@@ -418,6 +419,9 @@ tile_set = SubResource("TileSet_yt1vg")
 
 [node name="Skeleton" parent="Mobs" instance=ExtResource("13_vrrl3")]
 position = Vector2(1032, 912)
+
+[node name="Skeleton2" parent="Mobs" instance=ExtResource("13_vrrl3")]
+position = Vector2(1216, 904)
 
 [node name="Player" type="Node2D" parent="."]
 
