@@ -481,7 +481,7 @@ class DeathStatePlayer : StatePlayer
 		player.MoveAndSlide();
 
 		player.animatedPlayer.Play("Death");
-	}
+    }
 
 	public override void Regeneration()
     {
@@ -792,8 +792,8 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 		else if (NameAnime == "Death")
 		{
-			Signals.Instance.EmitKillLevel();
-			return;
+            Signals.Instance.EmitDeathPlayer();
+            return;
 		}
 		ChangeState(new MoveStatePlayer(this));
 	}

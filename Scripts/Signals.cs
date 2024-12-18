@@ -23,6 +23,10 @@ public partial class Signals : Node
 	public delegate void AccelerationAbilityEventHandler();
 	[Signal]
 	public delegate void VampirismAbilityEventHandler();
+	[Signal]
+	public delegate void DeathPlayerEventHandler();
+	[Signal]
+	public delegate void FinishLevelEventHandler();
 
 	public static Signals Instance { get; private set; }
 
@@ -80,4 +84,14 @@ public partial class Signals : Node
 	{
 		EmitSignal(nameof(VampirismAbility));
 	}
+
+	public void EmitDeathPlayer()
+	{
+		EmitSignal(nameof(DeathPlayer));
+	}
+
+    public void EmitFinishLevel()
+    {
+        EmitSignal(nameof(FinishLevel));
+    }
 }

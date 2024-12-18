@@ -1245,7 +1245,8 @@ metadata/_edit_horizontal_guides_ = [-80.0]
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3.09459, 3.09459)
 sprite_frames = SubResource("SpriteFrames_y4c0q")
-animation = &"AbilityRegeneration"
+animation = &"Death"
+frame = 11
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
