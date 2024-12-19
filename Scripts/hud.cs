@@ -38,6 +38,11 @@ public partial class hud : CanvasLayer
 	public override void _ExitTree()
     {
         Signals.Instance.PlayerHealthChanged -= UpdateHealthBar;
+		Signals.Instance.PlayerHealthChanged -= UpdateHealthBar;
+		Signals.Instance.RegenerationHealthAbility -= Regeneration;
+		Signals.Instance.PowerAbility -= Power;
+		Signals.Instance.AccelerationAbility -= Acceleration;
+		Signals.Instance.VampirismAbility -= Vampirism; 
     }
 
 	private void UpdateHealthBar(float HP)

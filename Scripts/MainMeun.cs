@@ -71,7 +71,7 @@ public partial class MainMeun : Node2D
 	private void StartGame()
 	{
 		GlobalAudio.Instance.PlaySoundEffects("ButtonPressed");
-		var newScene = (PackedScene)GD.Load("res://Scenes//level.tscn");
+		var newScene = (PackedScene)GD.Load("res://Scenes/first_level.tscn");
 		var currentScene = GetTree().CurrentScene;
 		var nextSceneInstance = newScene.Instantiate();
 
